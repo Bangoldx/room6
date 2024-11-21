@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8">
-    <title>Room 6</title>
-</head>
-<body>
-<form action="">
-    <label> UserName
-    <input type="text" name="username">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+<form action="" method="post" id="login">
+    <div  class="form-group">
+        <label> UserName
+            <input type="text" name="username" class="form-control">
+        </label>
+    </div>
+    <div  class="form-group">
+        <label>Password
+        <input type="password" class="form-control">
     </label>
-    <label>Password
-        <input type="password">
-    </label>
-    <input type="submit" value="Go!">
+    </div>
+<div class="form-group">
+    <input type="submit" value="Go!" class="btn btn-success">
+</div>
     <a th:href="signup">Sign Up</a>
 </form>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

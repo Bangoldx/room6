@@ -1,16 +1,19 @@
 package com.room6.student_tutor.controllers;
-
 import com.room6.student_tutor.data.StudentRepository;
 import com.room6.student_tutor.data.TutorRepository;
 import com.room6.student_tutor.models.Student;
 import com.room6.student_tutor.models.Tutor;
+import com.room6.student_tutor.services.UserServices;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("signup")
+@RestController
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@RequestMapping("/userservices")
 public class NewUserController {
 
     @Autowired
@@ -18,39 +21,27 @@ public class NewUserController {
 
     @Autowired
     public StudentRepository studentRepository;
+    @Autowired
+    private UserServices userServices;
 
-//    @GetMapping
-//    public String displaySignUpPage() {
-//        return "signup";
-//    }
 
-    @GetMapping
-    public String newUserRegistration(Model model) {
-        model.addAttribute(new Student());
-        model.addAttribute(new Tutor());
-        return  "signup";
-    }
 
-    @PostMapping
-    public String processNewTutorRegistration(@ModelAttribute Tutor newTutor,@ModelAttribute Student newStudent, Model model, @RequestParam String role) {
+
+    @PostMapping("signup")
+    public ResponseEntity<String> processNewUserRegistration(@RequestBody Tutor newTutor,  @RequestParam String role) {
+
         if (role.equals("tutor")) {
-            model.addAttribute(new Tutor());
-            tutorRepository.save(newTutor);
-            return "redirect:/tutors/home";
+            userServices.registerTutor(newTutor);
         }
-        model.addAttribute(new Student());
-        studentRepository.save(newStudent);
-        return "redirect:/students/home";
+        return ResponseEntity.ok("Success");
     }
+    @PostMapping("signup")
+    public ResponseEntity<String> processNewUserRegistration(@RequestBody Student newStudent,  @RequestParam String role) {
 
-//    @PostMapping
-//    public String processNewStudentRegistration(@ModelAttribute Student newStudent, Model model, @RequestParam String role){
-//        if (role.equals("student")) {
-//            model.addAttribute(new Student());
-//            studentRepository.save(newStudent);
-//            return "students/home";
-//        }
-//        return "redirect:students/home";
-//    }
+        if(role.equals("student")){
+            userServices.registerStudent(newStudent);
+        }
+        return ResponseEntity.ok("Success");
+    }
 
 }

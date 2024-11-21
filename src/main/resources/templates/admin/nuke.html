@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body class="container">
 <header th:replace="fragments :: header"></header>
 
-
-<p><h1>Tutor Home</h1></p>
-
-<footer th:replace="fragments :: footer"></footer>
+<form method="post">
+<input type="submit" value="Delete" class="btn btn-danger">
+</form>
 
 </body>
 </html>
