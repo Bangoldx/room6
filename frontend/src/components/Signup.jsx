@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 const Signup = () => {
@@ -13,6 +14,7 @@ const Signup = () => {
     const [subjects, setSubjects] = ([]);
     const [error, setError] = useState("");
 
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +41,19 @@ const Signup = () => {
         });
         const result = await response.text();
         console.log(result);
+        if (response.status === 400) {
+            setError(result);
+        } else {
+            alert(result);
+            setUsername("");
+            setPassword("");
+            setVerify("");
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setUsername("");
+            navigate("/");
+        }
     }
     return (
         <>
@@ -79,20 +94,15 @@ const Signup = () => {
 
                     <hr />
 
-                    <h4>Select Subjects:</h4>
-                    <div>
-                        <input type="checkbox" id="subject1" name="subjects" value="Mathematics" onChange={(e) => setSubjects(e.target.value)} />
-                        <label>Mathematics</label>
-                        <input type="checkbox" id="subject2" name="subjects" value="Language" onChange={(e) => setSubjects(e.target.value)} />
-                        <label>Language</label>
-                        <input type="checkbox" id="subject3" name="subjects" value="History" onChange={(e) => setSubjects(e.target.value)} />
-                        <label>History</label>
-                        <input type="checkbox" id="subject4" name="subjects" value="Science" onChange={(e) => setSubjects(e.target.value)} />
-                        <label>Science</label>
-                        <input type="checkbox" id="subject5" name="subjects" value="Social Studies" onChange={(e) => setSubjects(e.target.value)} />
-                        <label>Social Studies</label>
-                    </div>
+                    <h4>Select Role:</h4>
 
+                    <div>
+                        <input type="radio" id="student" name="role" value="student" onChange={(e) => setRole(e.target.value)} />
+                        <label > Student</label>
+                        <input type="radio" id="tutor" name="role" value="tutor" onChange={(e) => setRole(e.target.value)} />
+                        <label > Tutor </label>
+                    </div>
+                    
                     <hr />
 
                     <div>
