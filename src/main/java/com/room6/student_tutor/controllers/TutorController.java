@@ -16,6 +16,6 @@ public class TutorController {
 
     @GetMapping("home")
     public String displayTutorHomepage(Model model){
-        return "tutors/home";
+        return "home/tutors";
     }
 }

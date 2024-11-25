@@ -19,19 +19,29 @@
                 <input type="email" name="email" class="form-control">
             </label>
             <label>Username:
-                <input type="text" name="username" class="form-control">
+                <input th:field="${registerFormDTO.username}" class="form-control">
             </label>
+            <p class="error" th:errors="${registerFormDTO.username}"></p>
         </div>
         <div class="form-group">
-            <label>
-                Password:
-                <input type='password' name='pwHash' class="form-control">
+            <label>Password
+                <input class="form-control" th:field="${registerFormDTO.password}" type="password" />
             </label>
-            <label>
-                Confirm Password:
-                <input type='password' name='verify' class="form-control">
+            <p class="error" th:errors="${registerFormDTO.password}"></p>
+            <label>Verify Password
+                <input class="form-control" th:field="${registerFormDTO.verifyPassword}" type="password" />
             </label>
         </div>
+<!--        <div class="form-group">-->
+<!--            <label>-->
+<!--                Password:-->
+<!--                <input type='password' name='pwHash' class="form-control">-->
+<!--            </label>-->
+<!--            <label>-->
+<!--                Confirm Password:-->
+<!--                <input type='password' name='verify' class="form-control">-->
+<!--            </label>-->
+<!--        </div>-->
     </div>
     <hr>
     <div class="form-group">

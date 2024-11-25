@@ -3,17 +3,34 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <header th:replace="fragments :: header"></header>
-<form action="" method="post" id="login">
-    <div  class="form-group">
-        <label> UserName
-            <input type="text" name="username" class="form-control">
+<h1>Welcome to Room 6</h1>
+<h3>A Place for learning!</h3>
+<form method="post">
+    <div class="form-group">
+        <label th:for="username">Username
+            <input class="form-control" th:field="${loginFormDTO.username}">
         </label>
+        <p class="error" th:errors="${loginFormDTO.username}"></p>
     </div>
-    <div  class="form-group">
+    <div class="form-group">
         <label>Password
-            <input type="password" class="form-control">
+            <input class="form-control" th:field="${loginFormDTO.password}" type="password">
         </label>
+        <p class="error" th:errors="${loginFormDTO.password}"></p>
     </div>
+<!--<form method="post" id="login">-->
+<!--    <div  class="form-group">-->
+<!--        <label> UserName-->
+<!--            <input th:field="${loginFormDTO.username}" class="form-control">-->
+<!--            <p class="error" th:errors="${loginFormDTO.username}"></p>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div  class="form-group">-->
+<!--        <label>Password-->
+<!--            <input th:field="${loginFormDTO.password}" class="form-control">-->
+<!--            <p class="error" th:errors="${loginFormDTO.password}"></p>-->
+<!--        </label>-->
+<!--    </div>-->
     <div class="form-group">
         <input type="submit" value="Go!" class="btn btn-success">
     </div>
@@ -22,4 +39,3 @@
 <footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
-<!--testing-->
