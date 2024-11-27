@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+<p><a th:href="@{forum/post}">
+    <button>Post new topic!</button>
+</a></p>
+<th:block th:each="post : ${topics}">
+    <p ><a th:href="@{'/view/' + ${post.id}}" th:text="${post.title}"></a></p>
+</th:block>
+<!--<ul>-->
+<!--    <li th:each="post : ${topics}">-->
+<!--        <p th:text="post.title"></p>-->
+<!--        <p thtext="post.body"></p>-->
+<!--    </li>-->
+<!--</ul>-->
+
+<p> Jobs:
+<!--<ul>-->
+<!--    <li th:each="job : ${skill.jobs}">-->
+<!--        <a th:href="@{'/view/' + ${job.id}}" th:text="${job.name}"></a>-->
+<!--    </li>-->
+<!--</ul>-->
+</p>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

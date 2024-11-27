@@ -33,12 +33,12 @@ public class NewUserController {
     private UserServices userServices;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AuthenticationController authenticationController;
 
     @GetMapping
     public String newUserRegistration(Model model) {
         model.addAttribute(new RegisterFormDTO());
-        model.addAttribute(new Student());
-        model.addAttribute(new Tutor());
         return "signup";
     }
 

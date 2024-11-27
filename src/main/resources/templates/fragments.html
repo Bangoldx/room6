@@ -17,6 +17,10 @@
     <div class="container">
         <div class="navbar-header">
             <a th:href="@{'/' + ${user.role} + '/home'}" class="navbar-brand">Room 6</a>
+            <a th:href="@{/forum}" class="navbar-brand">Forums</a>
+<!--            <select name="user-drop-down" id="user-drop-down">-->
+<!--                <option value="" th:text="${user.firstName + ' ' +user.lastName}"></option>-->
+<!--            </select>-->
             <a th:href="@{/logout}" class="navbar-brand">Logout</a>
         </div>
         <div class="navbar-collapse collapse">
