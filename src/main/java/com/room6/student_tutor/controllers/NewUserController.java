@@ -50,10 +50,9 @@ public class NewUserController {
             model.addAttribute("title", "Signup");
             return "signup";
         }
-        Tutor existingTutor = tutorRepository.findByUsername(registerFormDTO.getUsername());
-        Student existingStudent = studentRepository.findByUsername(registerFormDTO.getUsername());
+        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
-        if (existingTutor != null || existingStudent != null) {
+        if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
             model.addAttribute("title", "Signup");
             return "Signup";
@@ -66,18 +65,21 @@ public class NewUserController {
             model.addAttribute("title", "Signup");
             return "signup";
         }
+
         if (role.equals("tutor")) {
             User newTutorUser = new User(registerFormDTO.getFirstName(), registerFormDTO.getLastName(), registerFormDTO.getEmail(),
                     registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRole(), registerFormDTO.getSubjects());
             userRepository.save(newTutorUser);
             setUserInSession(request.getSession(), newTutorUser);
-            return "redirect:/tutors/home";
+            model.addAttribute("name", newTutorUser);
+            return "tutor/home";
         } else {
             User newStudentUser = new User(registerFormDTO.getFirstName(), registerFormDTO.getLastName(), registerFormDTO.getEmail(),
                     registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRole(), registerFormDTO.getSubjects());
             userRepository.save(newStudentUser);
             setUserInSession(request.getSession(), newStudentUser);
-            return "redirect:/students/home";
+            model.addAttribute("name", newStudentUser);
+            return "student/home";
         }
     }
 

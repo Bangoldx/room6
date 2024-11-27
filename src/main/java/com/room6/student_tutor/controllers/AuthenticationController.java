@@ -3,11 +3,8 @@ package com.room6.student_tutor.controllers;
 import com.room6.student_tutor.data.StudentRepository;
 import com.room6.student_tutor.data.TutorRepository;
 import com.room6.student_tutor.data.UserRepository;
-import com.room6.student_tutor.models.Student;
-import com.room6.student_tutor.models.Tutor;
 import com.room6.student_tutor.models.User;
 import com.room6.student_tutor.models.dto.LoginFormDTO;
-import com.room6.student_tutor.services.UserServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -34,15 +31,15 @@ public class AuthenticationController {
     private UserRepository userRepository;
 
     @GetMapping("/")
-    public String displayLoginForm(Model model) {
+    public String displayLoginForm(HttpServletRequest request, Model model) {
         model.addAttribute(new LoginFormDTO());
 //        model.addAttribute("title", "Log In");
         return "landing";
     }
 
-    @PostMapping()
-    public String processTutorLogin(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors errors,
-                                    HttpServletRequest request, Model model) {
+    @PostMapping("")
+    public String processUserLogin(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors errors,
+                                   HttpServletRequest request, Model model) {
 
         if (errors.hasErrors()) {
             return "landing";
@@ -63,15 +60,21 @@ public class AuthenticationController {
         }
 
         setUserInSession(request.getSession(), theUser);
-
-        if(theUser.getRole().equals("tutor")){
-            return "tutors/home";
-        } else if(theUser.getRole().equals("student")){
-            return "students/home";
+        if (theUser.getRole().equals("tutor")) {
+            model.addAttribute("name", theUser);
+            return "redirect:/tutor/home";
+        } else if (theUser.getRole().equals("student")) {
+            model.addAttribute("name", theUser);
+            return "redirect:/student/home";
         }
-        errors.rejectValue("username", "user.invalid", "The given username does not exist");
+        errors.rejectValue("username", "user.invalid", "You know you're not supposed to be here.");
         return "landing";
     }
+//    @GetMapping("/choices")
+//    public String quickTest(Model model){
+//        model.addAttribute("name", theUser)
+//        return "students/choices";
+//    }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {

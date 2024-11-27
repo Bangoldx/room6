@@ -2,6 +2,7 @@ package com.room6.student_tutor.controllers;
 
 import com.room6.student_tutor.data.StudentRepository;
 import com.room6.student_tutor.data.TutorRepository;
+import com.room6.student_tutor.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class AdminController {
     @Autowired
     public StudentRepository studentRepository;
 
+    @Autowired
+    public UserRepository userRepository;
+
 
     @GetMapping("nuke")
     public String nukeAllUsers(Model model){
@@ -33,6 +37,7 @@ public class AdminController {
     public String processDeleteEventsForm(){
         tutorRepository.deleteAll();
         studentRepository.deleteAll();
+        userRepository.deleteAll();
         return "redirect:/";
     }
 }

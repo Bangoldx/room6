@@ -3,20 +3,11 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <header th:replace="fragments :: header"></header>
-<h1 >Testing</h1>
+<p><h1 th:text="${'Hello student ' + user.firstName + ' ' + user.lastName }">Simply a student test</h1></p>
+<p><h2 th:text="${'Your current studied subjects are: ' + user.subjects}"></h2></p>
+<a th:href="test">test</a>
 
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
-DO NOT USE
 
-</body>
 <footer th:replace="fragments :: footer"></footer>
+</body>
 </html>

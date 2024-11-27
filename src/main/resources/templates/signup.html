@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<header th:replace="fragments :: header"></header>
+<!--<header th:replace="fragments :: header"></header>-->
 <form method="POST">
     <h4>Personal Information:</h4>
     <div class="form-group">
@@ -32,16 +32,7 @@
                 <input class="form-control" th:field="${registerFormDTO.verifyPassword}" type="password" />
             </label>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label>-->
-<!--                Password:-->
-<!--                <input type='password' name='pwHash' class="form-control">-->
-<!--            </label>-->
-<!--            <label>-->
-<!--                Confirm Password:-->
-<!--                <input type='password' name='verify' class="form-control">-->
-<!--            </label>-->
-<!--        </div>-->
+
     </div>
     <hr>
     <div class="form-group">
