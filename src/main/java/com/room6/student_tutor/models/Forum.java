@@ -1,10 +1,11 @@
 package com.room6.student_tutor.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Forum {
@@ -12,6 +13,7 @@ public class Forum {
     @Id
     @GeneratedValue
     private Integer id;
+
     @NotBlank
     @Size(min = 5, max = 30, message = "Title must be between 5 and 30 characters")
     private String title;
@@ -20,9 +22,17 @@ public class Forum {
     @Size(min = 30, max = 500, message = "Post must be between 30 and 500 characters")
     private String body;
 
-    public Forum(String body, String title) {
+    @ManyToMany
+    private List<Comment> comments = new ArrayList<>();
+
+//    @ManyToOne
+//    private User user;
+
+    public Forum(String body, String title,List<Comment> comments) {
         this.body = body;
         this.title = title;
+//        this.user = user;
+        this.comments = comments;
     }
 
     public Forum() {
@@ -51,4 +61,13 @@ public class Forum {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
 }

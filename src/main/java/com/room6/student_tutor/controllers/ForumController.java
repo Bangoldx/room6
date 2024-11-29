@@ -1,6 +1,8 @@
 package com.room6.student_tutor.controllers;
 
+import com.room6.student_tutor.data.CommentRepository;
 import com.room6.student_tutor.data.ForumRepository;
+import com.room6.student_tutor.models.Comment;
 import com.room6.student_tutor.models.Forum;
 import com.room6.student_tutor.models.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,10 +22,12 @@ public class ForumController {
     @Autowired
     ForumRepository forumRepository;
     @Autowired
+    CommentRepository commentRepository;
+    @Autowired
     AuthenticationController authenticationController;
 
     @GetMapping
-    public String viewForums(HttpServletRequest request, Model model){
+    public String viewForums(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User theUser = authenticationController.getUserFromSession(session);
         model.addAttribute("user", theUser);
@@ -35,7 +39,7 @@ public class ForumController {
     }
 
     @GetMapping("post")
-    public String postTopic(HttpServletRequest request,Model model){
+    public String postTopic(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User theUser = authenticationController.getUserFromSession(session);
         model.addAttribute(new Forum());
@@ -44,24 +48,51 @@ public class ForumController {
     }
 
     @PostMapping("post")
-    public String postTopic(@ModelAttribute @Valid Forum newPost, Model model){
-//        model.addAttribute(new Forum());
+    public String postTopic(@ModelAttribute @Valid Forum newPost, Model model) {
         forumRepository.save(newPost);
         return "redirect:/forum";
     }
+
     @GetMapping("view/{postId}")
-    public String displayViewPost(Model model, @PathVariable int postId) {
+    public String displayViewPost(HttpServletRequest request, Model model, @PathVariable int postId) {
+
+        HttpSession session = request.getSession();
+        User theUser = authenticationController.getUserFromSession(session);
+        model.addAttribute("user", theUser);
+
+        Iterable<Comment> comments = commentRepository.findAll();
 
         Optional<Forum> optPost = forumRepository.findById(postId);
         if (optPost.isPresent()) {
             Forum post = optPost.get();
             model.addAttribute("post", post);
-//            model.addAttribute("body", post);
-            return "redirect:/forum/view";
+            model.addAttribute(new Comment());
+            model.addAttribute("forum", comments);
+            return "forum/view";
         } else {
             return "redirect:../";
         }
-
     }
+
+    @PostMapping("view/{postId}")
+    public String processNewComments(@ModelAttribute @Valid Comment newComment, HttpServletRequest request, Model model, @PathVariable int postId) {
+        HttpSession session = request.getSession();
+        User theUser = authenticationController.getUserFromSession(session);
+        model.addAttribute("user", theUser);
+
+        Optional<Forum> optPost = forumRepository.findById(postId);
+        if (optPost.isPresent()) {
+            Forum post = optPost.get();
+            model.addAttribute("post", post);
+            model.addAttribute(new Comment());
+
+
+            commentRepository.save(newComment);
+            return "forum/view";
+        } else {
+            return "redirect:../";
+        }
+    }
+
 
 }

@@ -7,6 +7,21 @@
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.body}"></p>
 </div>
+<div class="comments">
+<!--    <ul>-->
+<!--        <li  th:each="comments : ${forum.comments}">-->
+<!--            <div>-->
+<!--                <p th:field="comments.body"></p>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--    </ul>-->
+</div>
+<div class="comment-post">
+    <form method="post">
+        <textarea th:field="${comment.body}" rows="3" cols="1" class="form-control"></textarea>
+        <input type="submit" value="Post" class="btn btn-success">
+    </form>
+</div>
 
 <footer th:replace="fragments :: footer"></footer>
 </body>
