@@ -13,29 +13,26 @@ public class Comment {
     @GeneratedValue
     private int Id;
 
-    @ManyToMany(mappedBy="comments")
-    private final List<Forum> post = new ArrayList<>();
-
-//    @ManyToOne
-//    private User user;
+    @ManyToOne
+    private Forum forum;
 
     private String body;
 
-    public Comment(String body){
-
+    public Comment(String body, Forum forum) {
+        this.forum = forum;
         this.body = body;
     }
 
-    public Comment(){}
-
-
-    public List<Forum> getPost() {
-        return post;
+    public Comment() {
     }
 
-//    public void setPost(List<Forum> post) {
-//        this.post = post;
-//    }
+    public Forum getForum() {
+        return forum;
+    }
+
+    public void setForum(Forum forum) {
+        this.forum = forum;
+    }
 
     public String getBody() {
         return body;

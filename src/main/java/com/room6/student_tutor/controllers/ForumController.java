@@ -60,14 +60,13 @@ public class ForumController {
         User theUser = authenticationController.getUserFromSession(session);
         model.addAttribute("user", theUser);
 
-        Iterable<Comment> comments = commentRepository.findAll();
-
         Optional<Forum> optPost = forumRepository.findById(postId);
+        Iterable<Comment> comments = commentRepository.findAll();
         if (optPost.isPresent()) {
             Forum post = optPost.get();
             model.addAttribute("post", post);
+//            if(commentRepository.findForumId(post)){}
             model.addAttribute(new Comment());
-            model.addAttribute("forum", comments);
             return "forum/view";
         } else {
             return "redirect:../";
@@ -85,7 +84,6 @@ public class ForumController {
             Forum post = optPost.get();
             model.addAttribute("post", post);
             model.addAttribute(new Comment());
-
 
             commentRepository.save(newComment);
             return "forum/view";

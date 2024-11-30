@@ -3,13 +3,14 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 <header th:replace="fragments :: header"></header>
+<form method="post">
 <div class="forum-post">
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.body}"></p>
 </div>
 <div class="comments">
 <!--    <ul>-->
-<!--        <li  th:each="comments : ${forum.comments}">-->
+<!--        <li  th:each="comments : ${forum}">-->
 <!--            <div>-->
 <!--                <p th:field="comments.body"></p>-->
 <!--            </div>-->
@@ -17,11 +18,12 @@
 <!--    </ul>-->
 </div>
 <div class="comment-post">
-    <form method="post">
+
         <textarea th:field="${comment.body}" rows="3" cols="1" class="form-control"></textarea>
+    <input type="checkbox" name="forum" th:value="${post.id}" checked hidden>
         <input type="submit" value="Post" class="btn btn-success">
-    </form>
 </div>
+</form>
 
 <footer th:replace="fragments :: footer"></footer>
 </body>

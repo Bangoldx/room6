@@ -3,10 +3,9 @@ package com.room6.student_tutor.controllers;
 import com.room6.student_tutor.data.StudentRepository;
 import com.room6.student_tutor.data.TutorRepository;
 import com.room6.student_tutor.data.UserRepository;
-import com.room6.student_tutor.models.Student;
-import com.room6.student_tutor.models.Tutor;
 import com.room6.student_tutor.models.User;
 import com.room6.student_tutor.models.dto.RegisterFormDTO;
+import com.room6.student_tutor.services.UserServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.room6.student_tutor.services.UserServices;
 
 import java.util.Optional;
 
