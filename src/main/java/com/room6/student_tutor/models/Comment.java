@@ -14,6 +14,7 @@ public class Comment {
     private int Id;
 
     @ManyToOne
+    @JoinColumn(name= "forum_id")
     private Forum forum;
 
     private String body;

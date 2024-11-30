@@ -22,9 +22,9 @@ public class Forum {
     @Size(min = 30, max = 500, message = "Post must be between 30 and 500 characters")
     private String body;
 
-    @OneToMany
-    @JoinColumn(name = "forum_id")
-    private final List<Comment> comment = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn(name = "forum_id")
+//    private final List<Comment> comment = new ArrayList<>();
 
     public Forum(String body, String title) {
         this.body = body;
@@ -58,8 +58,8 @@ public class Forum {
         this.title = title;
     }
 
-    public List<Comment> getComment() {
-        return comment;
-    }
+//    public List<Comment> getComment() {
+//        return comment;
+//    }
 
 }

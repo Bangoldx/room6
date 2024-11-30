@@ -5,6 +5,7 @@ import com.room6.student_tutor.data.ForumRepository;
 import com.room6.student_tutor.models.Comment;
 import com.room6.student_tutor.models.Forum;
 import com.room6.student_tutor.models.User;
+import com.room6.student_tutor.services.CommentService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -25,6 +26,9 @@ public class ForumController {
     CommentRepository commentRepository;
     @Autowired
     AuthenticationController authenticationController;
+
+    @Autowired
+    CommentService commentService;
 
     @GetMapping
     public String viewForums(HttpServletRequest request, Model model) {
@@ -54,7 +58,7 @@ public class ForumController {
     }
 
     @GetMapping("view/{postId}")
-    public String displayViewPost(HttpServletRequest request, Model model, @PathVariable int postId) {
+    public String displayViewPost(HttpServletRequest request, Model model, @PathVariable long postId) {
 
         HttpSession session = request.getSession();
         User theUser = authenticationController.getUserFromSession(session);
@@ -65,7 +69,7 @@ public class ForumController {
         if (optPost.isPresent()) {
             Forum post = optPost.get();
             model.addAttribute("post", post);
-//            if(commentRepository.findForumId(post)){}
+            if(commentService.getCommentsByForumId(post).contains(postId)){}
             model.addAttribute(new Comment());
             return "forum/view";
         } else {
@@ -74,7 +78,7 @@ public class ForumController {
     }
 
     @PostMapping("view/{postId}")
-    public String processNewComments(@ModelAttribute @Valid Comment newComment, HttpServletRequest request, Model model, @PathVariable int postId) {
+    public String processNewComments(@ModelAttribute @Valid Comment newComment, HttpServletRequest request, Model model, @PathVariable long postId) {
         HttpSession session = request.getSession();
         User theUser = authenticationController.getUserFromSession(session);
         model.addAttribute("user", theUser);
