@@ -15,12 +15,15 @@ public class Comment {
 
     @ManyToOne
     private Forum forum;
+    @ManyToOne
+    private User user;
 
     private String body;
 
-    public Comment(String body, Forum forum) {
+    public Comment(String body, Forum forum, User user) {
         this.forum = forum;
         this.body = body;
+        this.user = user;
     }
 
     public Comment() {
@@ -42,5 +45,11 @@ public class Comment {
         this.body = body;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

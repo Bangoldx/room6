@@ -24,11 +24,15 @@ public class Forum {
 
     @OneToMany
     @JoinColumn(name = "forum_id")
-    private final List<Comment> comment = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
 
-    public Forum(String body, String title) {
+    @ManyToOne
+    private User user;
+
+    public Forum(String body, String title, User user) {
         this.body = body;
         this.title = title;
+        this.user = user;
     }
 
     public Forum() {
@@ -59,7 +63,14 @@ public class Forum {
     }
 
     public List<Comment> getComment() {
-        return comment;
+        return comments;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

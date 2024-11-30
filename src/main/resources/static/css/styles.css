@@ -1,62 +1,97 @@
-.body-content {
-    margin-top: 72px;
+body{
+background-color: #FFF7D1;
 }
 
-td, th {
-    padding: 10px;
+/* ***landing page*** */
+body, html {
+    height: 100%;
+    width:100%;
+    margin:0;
 }
 
-th {
-    text-align: center;
+/* The hero image */
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/classroom.jpg");
+
+  /* Set a specific height */
+  height: 50%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
 
-td {
-    vertical-align: top;
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+.landing{
+margin:0;
+width:100%;
+align: center;
 }
 
-tr:nth-child(odd) {
-    background-color: #e4e4e4;
+.login{
+position: absolute;
+top:5%;
+left:80%;
+display:inline-block;
+text-align: center;
+font-weight: 600;
+color:white;
 }
 
-.centeredTable {
-    margin-left: auto;
-    margin-right: auto;
+.login-button{
+padding-top: 10px;
 }
 
-table.job-listing {
-    margin: 30px auto;
-    border: 1px solid #e4e4e4;
-    width: 80%;
+.login-label{
+padding:4px;
 }
 
-table.job-listing td:first-child {
-    font-weight: bold;
+.signup{
+color:white;
 }
 
-table.job-listing td:last-child {
-    width: 80%;
+/* ***Navbar*** */
+.navbar{
+border-bottom:2px solid black;
+background-color: #FFD09B;
+padding:2%;
 }
 
-label {
-    margin-right: 15px;
+.navbar-brand{
+font-weight:bold;
 }
 
-.centered {
-    text-align: center;
+/* ***Forum Page*** */
+.post-container{
+margin:2%;
 }
 
-p {
-    vertical-align: top;
-    margin-left: 30px;
+.comment-block{
+border: 2px solid black;
 }
 
-.centeredTable {
-    margin-left: auto;
-    margin-right: auto;
+.comment-username{
+margin: 0;
+background-color: lightgrey;
+border:1px solid black;
 }
 
-div.job-listing {
-    border: 1px solid #e4e4e4;
-    width: 80%;
-    background-color: #e4e4e4;
+.forum-label{
+font-weight:600;
+}
+
+/* ***Footer*** */
+footer{
+text-align:center;
 }

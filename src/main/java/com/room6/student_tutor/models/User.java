@@ -20,4 +20,20 @@ public class User extends AbstractUser{
 
     public User(){};
 
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private final List<Forum> posts = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private final List<Comment> comments = new ArrayList<>();
+
+    public List<Forum> getPosts() {
+        return posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 }

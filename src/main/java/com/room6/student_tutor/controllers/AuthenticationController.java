@@ -30,11 +30,14 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+
     @GetMapping("/")
     public String displayLoginForm(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        User theUser = getUserFromSession(session);
         model.addAttribute(new LoginFormDTO());
-//        model.addAttribute("title", "Log In");
-        return "landing";
+            return "landing";
+
     }
 
     @PostMapping("")
@@ -70,11 +73,6 @@ public class AuthenticationController {
         errors.rejectValue("username", "user.invalid", "You know you're not supposed to be here.");
         return "landing";
     }
-//    @GetMapping("/choices")
-//    public String quickTest(Model model){
-//        model.addAttribute("name", theUser)
-//        return "students/choices";
-//    }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
