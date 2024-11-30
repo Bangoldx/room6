@@ -4,25 +4,21 @@
 <body class="container">
 <header th:replace="fragments :: header"></header>
 <form method="post">
-<div class="forum-post">
-    <h1 th:text="${post.title}"></h1>
-    <p th:text="${post.body}"></p>
-</div>
-<div class="comments">
-<!--    <ul>-->
-<!--        <li  th:each="comments : ${forum}">-->
-<!--            <div>-->
-<!--                <p th:field="comments.body"></p>-->
-<!--            </div>-->
-<!--        </li>-->
-<!--    </ul>-->
-</div>
-<div class="comment-post">
+    <div class="forum-post">
+        <h1 th:text="${post.title}"></h1>
+        <h4 th:text="${post.body}"></h4>
+    </div>
+    <div class="comments">
+        <th:block th:each="comment : ${post.comment}">
+            <p th:text="${comment.body}"></p>
+        </th:block>
+    </div>
+    <div class="comment-post">
 
         <textarea th:field="${comment.body}" rows="3" cols="1" class="form-control"></textarea>
-    <input type="checkbox" name="forum" th:value="${post.id}" checked hidden>
+        <input type="checkbox" name="forum" th:value="${post.id}" checked hidden>
         <input type="submit" value="Post" class="btn btn-success">
-</div>
+    </div>
 </form>
 
 <footer th:replace="fragments :: footer"></footer>

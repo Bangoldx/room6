@@ -61,7 +61,7 @@ public class ForumController {
         model.addAttribute("user", theUser);
 
         Optional<Forum> optPost = forumRepository.findById(postId);
-        Iterable<Comment> comments = commentRepository.findAll();
+
         if (optPost.isPresent()) {
             Forum post = optPost.get();
             model.addAttribute("post", post);
@@ -72,7 +72,14 @@ public class ForumController {
             return "redirect:../";
         }
     }
-
+//    Optional<Employer> optEmployer = employerRepository.findById(employerId);
+//        if (optEmployer.isPresent()) {
+//        Employer employer = optEmployer.get();
+//        model.addAttribute("employer", employer);
+//        return "employers/view";
+//    } else {
+//        return "redirect:../";
+//    }
     @PostMapping("view/{postId}")
     public String processNewComments(@ModelAttribute @Valid Comment newComment, HttpServletRequest request, Model model, @PathVariable int postId) {
         HttpSession session = request.getSession();
