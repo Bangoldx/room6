@@ -15,11 +15,11 @@ public class Forum {
     private Integer id;
 
     @NotBlank
-    @Size(min = 5, max = 30, message = "Title must be between 5 and 30 characters")
+    @Size(min = 5, max = 50, message = "Title must be between 5 and 50 characters")
     private String title;
 
     @NotBlank
-    @Size(min = 30, max = 500, message = "Post must be between 30 and 500 characters")
+    @Size(min = 5, max = 650, message = "Post must be between 5 and 650 characters")
     private String body;
 
     @OneToMany
