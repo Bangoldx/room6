@@ -68,15 +68,15 @@ public class NewUserController {
                     registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRole(), registerFormDTO.getSubjects());
             userRepository.save(newTutorUser);
             setUserInSession(request.getSession(), newTutorUser);
-            model.addAttribute("name", newTutorUser);
-            return "tutor/home";
+            model.addAttribute("user", newTutorUser);
+            return "redirect:tutor/home";
         } else {
             User newStudentUser = new User(registerFormDTO.getFirstName(), registerFormDTO.getLastName(), registerFormDTO.getEmail(),
                     registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getRole(), registerFormDTO.getSubjects());
             userRepository.save(newStudentUser);
             setUserInSession(request.getSession(), newStudentUser);
-            model.addAttribute("name", newStudentUser);
-            return "student/home";
+            model.addAttribute("user", newStudentUser);
+            return "redirect:student/home";
         }
     }
 

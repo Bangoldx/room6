@@ -3,7 +3,7 @@
 <head th:replace="~{fragments :: head}"></head>
 <body>
 <header th:replace="~{fragments :: header}"></header>
-<div class="user-container">
+<div id="top" class="user-container">
     <h1 th:text="${'Hello student ' + user.firstName + ' ' + user.lastName }">Simply a student test</h1></p>
     <div class="user-subjects">
         <p>Your Subjects</p>
@@ -12,16 +12,17 @@
         </ul>
     </div>
     <div class="user-posts">
-        <table class="user-posts-table" >
+        <table class="user-posts-table">
             <thead>
             <tr>
                 <th>Posts</th>
+                <th>Comments</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="post : ${user.posts}">
                 <td><a th:href="@{'../forum/view/' + ${post.id}}" th:text="${post.title}"></a></td>
-                <!--                <td th:text="${post.comments.size}"></td>-->
+                <td th:text="${post.comment.size}"></td>
             </tr>
             </tbody>
         </table>

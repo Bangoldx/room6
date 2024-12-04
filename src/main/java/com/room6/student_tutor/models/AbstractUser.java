@@ -1,7 +1,5 @@
 package com.room6.student_tutor.models;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -9,24 +7,14 @@ import java.util.Objects;
 
 @MappedSuperclass
 public abstract class AbstractUser {
+    @TableGenerator(name = "yourTableGenerator", allocationSize = 1, initialValue = 1)
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="yourTableGenerator")
     private int id;
-//
-//    @NotBlank
-//    @Size(min = 2, max = 50, message = "First name should be at least 2 characters.")
     private String firstName;
-//
-//    @NotBlank
-//    @Size(min = 2, max = 50, message = "Last name should be at least 2 characters.")
     private String lastName;
-//
-//    @NotBlank
-//    @Email(message = "Proper email format required.")
     private String email;
-
     private String role;
-
     private String username;
 
     @NotNull

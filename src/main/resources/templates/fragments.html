@@ -31,7 +31,7 @@
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
 </head>
 <body>
-<div th:fragment="header" class="navbar navbar-inverse navbar-fixed-top">
+<div th:fragment="header" class="navbar fixed-top navbar-inverse navbar-fixed-top">
         <div class="navbar-header">
             <a th:href="@{'/' + ${user.role} + '/home'}" class="navbar-brand">Room 6</a>
             <a th:href="@{/forum}" class="navbar-brand">Forums</a>

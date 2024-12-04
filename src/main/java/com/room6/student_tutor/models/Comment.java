@@ -9,8 +9,11 @@ import java.util.List;
 @Entity
 public class Comment {
 
+    @TableGenerator(name = "yourTableGenerator", allocationSize = 1, initialValue = 1)
     @Id
-    @GeneratedValue
+    @GeneratedValue(
+            strategy=GenerationType.TABLE,
+            generator="yourTableGenerator")
     private int Id;
 
     @ManyToOne

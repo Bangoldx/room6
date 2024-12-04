@@ -31,14 +31,12 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
-
     @GetMapping("/")
     public String displayLoginForm(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         User theUser = getUserFromSession(session);
         model.addAttribute(new LoginFormDTO());
             return "landing";
-
     }
 
     @PostMapping("")

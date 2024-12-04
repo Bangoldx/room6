@@ -61,10 +61,19 @@ padding:4px;
 color:white;
 }
 
-#about{
+#about, #signup{
 padding-top:10px;
 text-align:center;
 font-size: 1.5rem;
+margin-top:5%;
+}
+
+.signup{
+color: black;
+}
+
+#top{
+margin-top: 55px;
 }
 
 /* ***Navbar*** */
