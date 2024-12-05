@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-<header th:replace="fragments :: header"></header>
-
+<!--<header th:replace="fragments :: header"></header>-->
+<div th:fragment="header" class="navbar fixed-top navbar-inverse navbar-fixed-top">
+</div>
+<div id="top">
 <form method="post">
-<input type="submit" value="Delete" class="btn btn-danger">
+    <input type="submit" value="Delete" class="btn btn-danger">
 </form>
-
+</div>
 </body>
 </html>

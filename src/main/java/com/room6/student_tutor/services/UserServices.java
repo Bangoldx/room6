@@ -2,7 +2,7 @@ package com.room6.student_tutor.services;
 
 import com.room6.student_tutor.data.StudentRepository;
 import com.room6.student_tutor.data.TutorRepository;
-import com.room6.student_tutor.data.UserRespository;
+import com.room6.student_tutor.data.UserRepository;
 import com.room6.student_tutor.models.Student;
 import com.room6.student_tutor.models.Tutor;
 import com.room6.student_tutor.models.User;
@@ -20,19 +20,12 @@ public class UserServices {
     private TutorRepository tutorRepository;
 
     @Autowired
-    private UserRespository userRespository;
+    UserRepository userRepository;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     public void registerUser(User user) {
         user.setPwHash(encoder.encode(user.getPwHash()));
-        userRespository.save(user);
+        userRepository.save(user);
     }
-    public void registerTutor(Tutor tutor) {
-        tutor.setPwHash(encoder.encode(tutor.getPwHash()));
-        tutorRepository.save(tutor);
-    }
-    public void registerStudent(Student student) {
-        student.setPwHash(encoder.encode(student.getPwHash()));
-        studentRepository.save(student);
-    }
-    }
+}

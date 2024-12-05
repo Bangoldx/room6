@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<div id="top" class="forum-container">
+<p><a th:href="@{forum/post}">
+    <button>Post new topic!</button>
+</a></p>
+<th:block th:each="post : ${topics}">
+    <p ><a th:href="@{'forum/view/' + ${post.id}}" th:text="${post.title}"></a></p>
+</th:block>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

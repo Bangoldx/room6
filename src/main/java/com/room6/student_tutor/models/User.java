@@ -1,23 +1,39 @@
 package com.room6.student_tutor.models;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import jakarta.persistence.Entity;
-    @Entity
-    public class User extends AbstractUser {
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
-//        @ManyToOne
-//        @NotNull(message = "Category is required")
-//        private EventCategory eventCategory;
+import java.util.ArrayList;
+import java.util.List;
 
-        public User(String firstName, String lastName, String email, String username, String pwHash, String role, String subjects) {
-            super(firstName, lastName, email, username, pwHash, role, subjects);
-        }
+@Entity
+public class User extends AbstractUser{
 
-        public User() {}
-
+    public User(String firstName, String lastName, String email, String username, String pwHash, String role, String subjects){
+        super(firstName, lastName, email, username, pwHash, role, subjects);
     }
 
+    public User(String username, String password){
+        super(username,password);
+    }
+
+    public User(){};
+
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private final List<Forum> posts = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private final List<Comment> comments = new ArrayList<>();
+
+    public List<Forum> getPosts() {
+        return posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+}
