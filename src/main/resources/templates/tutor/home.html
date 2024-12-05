@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+<header th:replace="~{fragments :: header}"></header>
+<div id="top" class="user-container">
+    <h1 th:text="${'Hello tutor ' + user.firstName + ' ' + user.lastName }">Simply a student test</h1></p>
+    <div class="user-subjects">
+        <p>Your Subjects</p>
+        <ul th:each="subject : ${user.subjects}">
+            <li th:text="${subject}"></li>
+        </ul>
+    </div>
+    <div class="user-posts">
+        <table class="user-posts-table">
+            <thead>
+            <tr>
+                <th>Posts</th>
+                <th>Comments</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="post : ${user.posts}">
+                <td><a th:href="@{'../forum/view/' + ${post.id}}" th:text="${post.title}"></a></td>
+                <td th:text="${post.comment.size}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>
