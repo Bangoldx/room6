@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
-@RequestMapping("signup")
+//@Controller
+//@RequestMapping("signup")
+@RestController
+//@RequestMapping("/userservice")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class NewUserController {
 
     @Autowired
@@ -33,13 +36,13 @@ public class NewUserController {
     @Autowired
     AuthenticationController authenticationController;
 
-    @GetMapping
+    @GetMapping("signup")
     public String newUserRegistration(Model model) {
         model.addAttribute(new RegisterFormDTO());
         return "signup";
     }
 
-    @PostMapping
+    @PostMapping("signup")
     public String processNewTutorRegistration(@ModelAttribute @Valid RegisterFormDTO registerFormDTO, Errors errors,
                                               HttpServletRequest request, Model model, @RequestParam String role) {
 

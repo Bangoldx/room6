@@ -57,59 +57,73 @@ const Signup = () => {
     }
     return (
         <>
-            <div>
-                <h1>Register Today!</h1>
-            </div>
-            <div>
-                <form method="POST" onSubmit={handleSubmit}>
-                    <h4>Personal Information:</h4>
-                    <div>
-                        <div>
-                            <label>First Name:
-                                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                            </label>
-                            <label>Last Name:
-                                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+            <body>
+                <div id="top" class="signup-container">
+                    <form method="POST">
+                        <h4>Personal Information:</h4>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>First Name:
+                                    <input type="text" name="firstName" class="form-control" />
+                                </label>
+                                <label>Last Name:
+                                    <input type="text" name="lastName" class="form-control" />
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Email:
+                                    <input type="email" name="email" class="form-control" />
+                                </label>
+                                <label>Username:
+                                    <input th:field="${registerFormDTO.username}" class="form-control" />
+                                </label>
+                                <p class="error" th:errors="${registerFormDTO.username}"></p>
+                            </div>
+                            <div class="form-group">
+                                <label>Password
+                                    <input class="form-control" th:field="${registerFormDTO.password}" type="password" />
+                                </label>
+                                <p class="error" th:errors="${registerFormDTO.password}"></p>
+                                <label>Verify Password
+                                    <input class="form-control" th:field="${registerFormDTO.verifyPassword}" type="password" />
+                                </label>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label><h4>Select Role:</h4>
+                                <input type="radio" id="student" name="role" value="student" />
+                                <label for="student"> Student</label>
+                                <input type="radio" id="tutor" name="role" value="tutor" />
+                                <label for="tutor"> Tutor </label>
                             </label>
                         </div>
-                        <div>
-                            <label>Email:
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            </label>
-                            <label>Username:
-                                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                        <hr />
+                        <div class="form-group">
+
+                            <label><h4>Select Subjects:</h4>
+
+                                <input type="checkbox" id="subject1" name="subjects" value="Mathematics" />
+                                <label for="subject1">Mathematics</label>
+                                <input type="checkbox" id="subject2" name="subjects" value="Language" />
+                                <label for="subject2">Language</label>
+                                <input type="checkbox" id="subject3" name="subjects" value="History" />
+                                <label for="subject3">History</label>
+                                <input type="checkbox" id="subject4" name="subjects" value="Science" />
+                                <label for="subject4">Science</label>
+                                <input type="checkbox" id="subject5" name="subjects" value="Social Studies" />
+                                <label for="subject5">Social Studies</label>
                             </label>
                         </div>
-                        <div>
-                            <label>
-                                Password:
-                                <input type='password' value={pwHash} onChange={(e) => setPassword(e.target.value)} />
-                            </label>
-                            <label>
-                                Confirm Password:
-                                <input type='password' name='verify' onChange={(e) => setVerify(e.target.value)} />
-                            </label>
+                        <hr />
+                        <div class="form-group">
+                            <input type="submit" value="Sign Up!" class="btn btn-success" />
                         </div>
-                    </div>
-
-                    <hr />
-
-                    <h4>Select Role:</h4>
-
-                    <div>
-                        <input type="radio" id="student" name="role" value="student" onChange={(e) => setRole(e.target.value)} />
-                        <label > Student</label>
-                        <input type="radio" id="tutor" name="role" value="tutor" onChange={(e) => setRole(e.target.value)} />
-                        <label > Tutor </label>
-                    </div>
-                    
-                    <hr />
-
-                    <div>
-                        <input type="submit" value="Sign Up!" onClick={handleSubmit} />
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
+                <footer th:replace="~{fragments :: footer}"></footer>
+            </body>
         </>
     );
 }
