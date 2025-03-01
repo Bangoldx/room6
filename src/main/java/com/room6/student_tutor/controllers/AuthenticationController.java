@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
+@RestController
+@RequestMapping("/userservice")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class AuthenticationController {
 
     @Autowired
@@ -31,47 +31,49 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/")
-    public String displayLoginForm(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User theUser = getUserFromSession(session);
-        model.addAttribute(new LoginFormDTO());
-            return "landing";
-    }
+//    @GetMapping("/")
+//    public String displayLoginForm(HttpServletRequest request, Model model) {
+//        HttpSession session = request.getSession();
+//        User theUser = getUserFromSession(session);
+//        model.addAttribute(new LoginFormDTO());
+//            return "landing";
+//    }
+//
 
-    @PostMapping("")
-    public String processUserLogin(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors errors,
-                                   HttpServletRequest request, Model model) {
+//    @PostMapping(/)
+//    @PostMapping("")
+//    public String processUserLogin(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors errors,
+//                                   HttpServletRequest request, Model model) {
+//
+//        if (errors.hasErrors()) {
+//            return "landing";
+//        }
 
-        if (errors.hasErrors()) {
-            return "landing";
-        }
-
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
-
-        if (theUser == null) {
-            errors.rejectValue("username", "user.invalid", "The given username does not exist");
-            return "landing";
-        }
-
-        String password = loginFormDTO.getPassword();
-
-        if (!theUser.isMatchingPassword(password)) {
-            errors.rejectValue("password", "password.invalid", "Invalid password");
-            return "landing";
-        }
-
-        setUserInSession(request.getSession(), theUser);
-        if (theUser.getRole().equals("tutor")) {
-            model.addAttribute("name", theUser);
-            return "redirect:/tutor/home";
-        } else if (theUser.getRole().equals("student")) {
-            model.addAttribute("name", theUser);
-            return "redirect:/student/home";
-        }
-        errors.rejectValue("username", "user.invalid", "You know you're not supposed to be here.");
-        return "landing";
-    }
+//        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+//
+//        if (theUser == null) {
+//            errors.rejectValue("username", "user.invalid", "The given username does not exist");
+//            return "landing";
+//        }
+//
+//        String password = loginFormDTO.getPassword();
+//
+//        if (!theUser.isMatchingPassword(password)) {
+//            errors.rejectValue("password", "password.invalid", "Invalid password");
+//            return "landing";
+//        }
+//
+//        setUserInSession(request.getSession(), theUser);
+//        if (theUser.getRole().equals("tutor")) {
+//            model.addAttribute("name", theUser);
+//            return "redirect:/tutor/home";
+//        } else if (theUser.getRole().equals("student")) {
+//            model.addAttribute("name", theUser);
+//            return "redirect:/student/home";
+//        }
+//        errors.rejectValue("username", "user.invalid", "You know you're not supposed to be here.");
+//        return "landing";
+//    }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
