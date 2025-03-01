@@ -3,9 +3,6 @@ package com.room6.student_tutor.models;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 public class Comment {
 

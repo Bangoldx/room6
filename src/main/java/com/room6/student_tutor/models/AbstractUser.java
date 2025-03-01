@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -20,10 +21,10 @@ public abstract class AbstractUser {
     @NotNull
     private String pwHash;
 
-    private String subjects;
+    private List<String> subjects;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role, String subjects) {
+    public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role, List<String> subjects) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -76,11 +77,11 @@ public abstract class AbstractUser {
         this.role = role;
     }
 
-    public String getSubjects() {
+    public List<String> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(String subjects) {
+    public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
     }
 
