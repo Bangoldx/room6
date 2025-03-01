@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Student = ({user}) => {
+const Tutor = ({user}) => {
 
     // const[users, setUser] = useState([])
 
@@ -20,10 +20,10 @@ const Student = ({user}) => {
     return (
         <>
             <div id="top" class="user-container">
-                <h1>Hello student {user.firstName} {user.lastName}</h1>
+                <h1>Hello tutor {user.firstName} {user.lastName}</h1>
                 </div>
         </>
     );
 }
 
-export default Student;
+export default Tutor;

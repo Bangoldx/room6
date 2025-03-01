@@ -14,18 +14,22 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 
+import { useNavigate } from "react-router";
+
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
 
-function ResponsiveAppBar({ user }) {
+function ResponsiveAppBar({ user, logoutUser }) {
 
     let loggedIn = false;
     let initials = "?";
     if (user) {
         loggedIn = true;
     }
+
+    const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -41,7 +45,10 @@ function ResponsiveAppBar({ user }) {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (e) => {
+        e.preventDefault();
+        logoutUser();
+        navigate("/");
         setAnchorElUser(null);
     };
 
