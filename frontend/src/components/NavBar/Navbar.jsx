@@ -14,10 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import getUserInitials from '../../utilities';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Forums', 'Subjects', 'Contact'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 
 
@@ -47,6 +47,11 @@ function ResponsiveAppBar({ user, logoutUser }) {
     };
 
     const handleCloseUserMenu = (e) => {
+
+        setAnchorElUser(null);
+    };
+
+    const handleLogoutUserMenu = (e) => {
         e.preventDefault();
         logoutUser();
         navigate("/");
@@ -157,7 +162,7 @@ function ResponsiveAppBar({ user, logoutUser }) {
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" >
-                                    {initials}
+                                        {initials}
                                     </Avatar>
                                 </IconButton>
                             </Tooltip>
@@ -182,6 +187,12 @@ function ResponsiveAppBar({ user, logoutUser }) {
                                         <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                                     </MenuItem>
                                 ))}
+                                <MenuItem onClick={handleLogoutUserMenu}>
+                                    <Typography sx={{ textAlign: 'center', textDecoration: "none", color: "black" }}>
+                                        Logout
+                                    </Typography>
+
+                                </MenuItem>
                             </Menu>
                         </Box>
                     }

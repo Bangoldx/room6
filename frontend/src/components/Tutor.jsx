@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Tutor = ({user}) => {
 
-    // const[users, setUser] = useState([])
+const Tutor = ({user, refreshUser}) => {
 
-    // useEffect(() =>{
-    //     const fetchData = async () => {
-    //         try{
-    //             const response = await fetch.get("http://localhost:8080/student/home/");
-    //             setUser(response.data);
-    //         } catch (error) {
-    //             console.error("Error fetching data: " , error);
-    //         }
-    //     };
-    //     fetchData();
-    // })
+    const navigate = useNavigate();
+
+    // refreshUser();
+    if(!user || !user.role === "tutor"){
+        navigate("/login")
+    }
 
     return (
         <>

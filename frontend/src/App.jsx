@@ -19,7 +19,7 @@ function App() {
       setSessionData(JSON.parse(storedData));
       setUser(JSON.parse(storedData));
     }
-    
+
   }, []);
 
   const refreshUser = async () => {
@@ -68,41 +68,42 @@ function App() {
   return (
     <>
       <Router>
-      <NavBar  
-      user={user}
-      logoutUser={logoutUser}/>
-          
+        <NavBar
+          user={user}
+          logoutUser={logoutUser} />
         <br />
         <br />
         <Routes>
 
           <Route path='/'
-          element={<Landing />}>
+            element={<Landing />}>
           </Route>
 
           <Route path='signup'
-          element={<Signup />}>
+            element={<Signup />}>
           </Route>
 
           <Route path='login'
-          element={<Login 
-            refreshUser={refreshUser}
-            user={user}/>}>
+            element={<Login
+              refreshUser={refreshUser}
+              user={user} />}>
           </Route>
 
           <Route path='student'
-          element={<Student 
-            user={user}/>}>
+            element={<Student
+              user={user}
+              refreshUser={refreshUser} />}>
           </Route>
 
           <Route path='tutor'
-          element={<Tutor 
-            user={user}/>}>
+            element={<Tutor
+              user={user}
+              refreshUser={refreshUser} />}>
           </Route>
-          
+
         </Routes>
       </Router>
-      
+
     </>
   )
 }
