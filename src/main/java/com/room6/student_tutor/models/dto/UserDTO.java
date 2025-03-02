@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public class UserDTO {
 
 
@@ -20,9 +22,9 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String role;
-    private String subjects;
+    private List<String> subjects;
 
-    public UserDTO(String username, String firstName, String lastName, String email, String role, String subjects) {
+    public UserDTO(String username, String firstName, String lastName, String email, String role, List<String> subjects) {
         this.username = username;
 //        this.password = password;
         this.firstName = firstName;
@@ -80,11 +82,11 @@ public class UserDTO {
         this.role = role;
     }
 
-    public String getSubjects() {
+    public List<String> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(String subjects) {
+    public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
     }
 }
