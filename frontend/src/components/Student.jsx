@@ -10,29 +10,36 @@ import { sizing } from '@mui/system';
 const Student = ({ user, refreshUser }) => {
 
     const navigate = useNavigate();
+    const subjects = user.subjects;
 
     return (
         <>
-                <div id="top" class="user-container">
-                    <h1>Hello student {user.firstName} {user.lastName}!</h1>
-                </div>
-                <Container sx={{ width:1 }}>
-                    <Grid2 container spacing={2}>
-                        <Grid2>
-                            <Card
-                                sx={{ width:"100%" }}>
-                                <h3>My Subjects</h3>
-                            </Card>
-                        </Grid2>
-                        <Grid2>
-                            <Card sx={{ width: 1 }}>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DateCalendar />
-                                </LocalizationProvider>
-                            </Card>
-                        </Grid2>
+            <div id="top" class="user-container">
+                <h1>Hello student {user.firstName} {user.lastName}!</h1>
+            </div>
+            <Container sx={{ width: 1 }}>
+                <Grid2 container spacing={2}>
+                    <Grid2>
+                        <Card
+                            sx={{ width: 322 }}>
+                            <h3>My Subjects</h3>
+                            <hr />
+                            <ul>
+                                {subjects.map((item, index) => (
+                                    <a href="sujects/"{...item}><li key={index}>{item}</li></a>
+                                ))}
+                            </ul>
+                        </Card>
                     </Grid2>
-                </Container>
+                    <Grid2>
+                        <Card sx={{ width: 1 }}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateCalendar />
+                            </LocalizationProvider>
+                        </Card>
+                    </Grid2>
+                </Grid2>
+            </Container>
 
         </>
     );

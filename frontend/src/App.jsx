@@ -104,6 +104,9 @@ function App() {
         </Routes>
       </Router>
 
+<br />
+<br />
+      <footer>&copy; Drew Williams @ Dais</footer>
     </>
   )
 }

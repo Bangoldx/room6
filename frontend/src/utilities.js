@@ -3,3 +3,4 @@ export default function getUserInitials(user) {
     const lastInitial = user.lastName ? user.lastName[0] : "";
     return (firstInitial + lastInitial).toUpperCase();
 }
+

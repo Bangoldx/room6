@@ -17,7 +17,7 @@ import getUserInitials from '../../utilities';
 import { useNavigate } from "react-router-dom";
 
 const pages = ['Forums', 'Subjects', 'Contact'];
-const settings = ['Profile', 'Account', 'Dashboard'];
+const settings = ['Dashboard' ,'Profile', 'Account' ];
 
 
 
@@ -183,6 +183,7 @@ function ResponsiveAppBar({ user, logoutUser }) {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
+                                    // <Link
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                         <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                                     </MenuItem>
