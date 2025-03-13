@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@Controller
-@RequestMapping("forum")
+@RestController
+@RequestMapping("/forumservices")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class ForumController {
 
     @Autowired
