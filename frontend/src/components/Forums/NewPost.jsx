@@ -1,12 +1,12 @@
 import React from "react";
 
-const Forum = () => {
+const NewPost = () =>{
 
-    return (
+    return 
+    (
         <>
         
         </>
     )
 }
-
-export default Forum;
+export default NewPost;
