@@ -2,17 +2,23 @@ package com.room6.student_tutor.controllers;
 
 import com.room6.student_tutor.data.CommentRepository;
 import com.room6.student_tutor.data.ForumRepository;
+import com.room6.student_tutor.mappers.ForumsDTOMapper;
 import com.room6.student_tutor.models.Comment;
 import com.room6.student_tutor.models.Forum;
 import com.room6.student_tutor.models.User;
+import com.room6.student_tutor.models.dto.ForumDTO;
+import com.room6.student_tutor.services.ForumServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,16 +33,19 @@ public class ForumController {
     @Autowired
     AuthenticationController authenticationController;
 
-    @GetMapping
-    public String viewForums(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession();
-        User theUser = authenticationController.getUserFromSession(session);
-        model.addAttribute("user", theUser);
+    @GetMapping("/forums")
+    public List<ForumDTO> viewForums() {
+        Iterable<Forum> forum = forumRepository.findAll();
+        List<ForumDTO> forumDTOS = new ArrayList<>();
 
-        Iterable<Forum> posts;
-        posts = forumRepository.findAll();
-        model.addAttribute("topics", posts);
-        return "forum/forum";
+        for(Forum post : forum){
+            User user = post.getUser();
+            String title = post.getTitle();
+            String body = post.getBody();
+            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,body,title,user);
+            forumDTOS.add(forumDTO);
+        }
+        return forumDTOS;
     }
 
     @GetMapping("post")

@@ -3,9 +3,11 @@ package com.room6.student_tutor.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 
 @Entity
 public class Forum {
@@ -30,10 +32,14 @@ public class Forum {
     @ManyToOne
     private User user;
 
+//    @ManyToOne
+//    private String postedDate;
+
     public Forum(String body, String title, User user) {
         this.body = body;
         this.title = title;
         this.user = user;
+//        this.postedDate = postedDate;
     }
 
     public Forum() {
@@ -74,4 +80,12 @@ public class Forum {
     public void setUser(User user) {
         this.user = user;
     }
+
+//    public String getPostedDate() {
+//        return postedDate;
+//    }
+//
+//    public void setPostedDate(String postedDate) {
+//        this.postedDate = postedDate;
+//    }
 }

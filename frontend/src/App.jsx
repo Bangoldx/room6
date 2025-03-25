@@ -7,6 +7,7 @@ import NavBar from './components/NavBar/Navbar'
 import Login from './components/Authentication/Login'
 import Student from './components/Student'
 import Tutor from './components/Tutor'
+import Forum from './components/Forums/Forums'
 
 function App() {
 
@@ -99,6 +100,9 @@ function App() {
             element={<Tutor
               user={user}
               refreshUser={refreshUser} />}>
+          </Route>
+          <Route path='forums'
+            element={<Forum />}>
           </Route>
 
         </Routes>

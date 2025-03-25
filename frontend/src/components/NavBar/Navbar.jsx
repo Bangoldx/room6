@@ -15,9 +15,10 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import getUserInitials from '../../utilities';
 import { useNavigate } from "react-router-dom";
+import { mainNavbarItems } from './consts/navbarItems';
 
 const pages = ['Forums', 'Subjects', 'Contact'];
-const settings = ['Dashboard' ,'Profile', 'Account' ];
+const settings = ['Dashboard', 'Profile', 'Account'];
 
 
 
@@ -108,10 +109,12 @@ function ResponsiveAppBar({ user, logoutUser }) {
                             onClose={handleCloseNavMenu}
                             sx={{ display: { xs: 'block', md: 'none' } }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                                </MenuItem>
+                            {mainNavbarItems.map((page) => (
+                                <Link key={page.id} to={`/${page.path}`}>
+                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                        <Typography sx={{ textAlign: 'center' }}>{page.label}</Typography>
+                                    </MenuItem>
+                                </Link>
                             ))}
                         </Menu>
                     </Box>
@@ -135,67 +138,69 @@ function ResponsiveAppBar({ user, logoutUser }) {
                         Room 6
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                        {mainNavbarItems.map((page) => (
+                            <Link key={page.id} to={`/${page.path}`}>
+                                <Button
+                                    key={page}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {page.label}
+                                </Button>
+                                </Link>
                         ))}
-                    </Box>
+                            </Box>
                     {!loggedIn ?
 
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Link style={{ textDecoration: "none", color: "#223843" }} to={`/login`}>
-                                <Button
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: '#223843', display: 'block' }}
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Link style={{ textDecoration: "none", color: "#223843" }} to={`/login`}>
+                                    <Button
+                                        onClick={handleCloseNavMenu}
+                                        sx={{ my: 2, color: '#223843', display: 'block' }}
+                                    >
+                                        Sign In
+                                    </Button>
+                                </Link>
+                            </Box>
+                            :
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Tooltip title="Open settings">
+                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" >
+                                            {initials}
+                                        </Avatar>
+                                    </IconButton>
+                                </Tooltip>
+                                <Menu
+                                    sx={{ mt: '45px' }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
                                 >
-                                    Sign In
-                                </Button>
-                            </Link>
-                        </Box>
-                        :
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" >
-                                        {initials}
-                                    </Avatar>
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    // <Link
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                                <MenuItem onClick={handleLogoutUserMenu}>
-                                    <Typography sx={{ textAlign: 'center', textDecoration: "none", color: "black" }}>
-                                        Logout
-                                    </Typography>
+                                    {settings.map((setting) => (
+                                        // <Link
+                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                            <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                                        </MenuItem>
+                                    ))}
+                                    <MenuItem onClick={handleLogoutUserMenu}>
+                                        <Typography sx={{ textAlign: 'center', textDecoration: "none", color: "black" }}>
+                                            Logout
+                                        </Typography>
 
-                                </MenuItem>
-                            </Menu>
-                        </Box>
+                                    </MenuItem>
+                                </Menu>
+                            </Box>
                     }
                 </Toolbar>
 
