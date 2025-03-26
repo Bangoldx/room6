@@ -35,7 +35,7 @@ public class ForumController {
 
     @GetMapping("/forums")
     public List<ForumDTO> viewForums() {
-        Iterable<Forum> forum = forumRepository.findAll();
+        List<Forum> forum = (List<Forum>) forumRepository.findAll();
         List<ForumDTO> forumDTOS = new ArrayList<>();
 
         for(Forum post : forum){
@@ -57,10 +57,10 @@ public class ForumController {
         return "forum/post";
     }
 
-    @PostMapping("post")
-    public String postTopic(@ModelAttribute @Valid Forum newPost, Model model) {
-        forumRepository.save(newPost);
-        return "redirect:/forum";
+    @PostMapping("/newpost")
+    public ResponseEntity<String> newPost(@RequestBody Forum post) {
+        forumRepository.save(post);
+        return ResponseEntity.ok("Posted");
     }
 
     @GetMapping("view/{postId}")

@@ -8,6 +8,7 @@ import Login from './components/Authentication/Login'
 import Student from './components/Student'
 import Tutor from './components/Tutor'
 import Forum from './components/Forums/Forums'
+import NewPost from './components/Forums/NewPost'
 
 function App() {
 
@@ -103,6 +104,10 @@ function App() {
           </Route>
           <Route path='forums'
             element={<Forum />}>
+          </Route>
+          <Route path='newpost'
+            element={<NewPost 
+            user={user}/>}>
           </Route>
 
         </Routes>

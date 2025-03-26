@@ -1,5 +1,6 @@
 package com.room6.student_tutor.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -21,7 +22,7 @@ public class User extends AbstractUser{
     public User(){};
 
 
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private final List<Forum> posts = new ArrayList<>();
 
