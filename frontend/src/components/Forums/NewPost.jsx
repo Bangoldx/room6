@@ -38,7 +38,6 @@ const NewPost = ({user}) => {
             setTitle("");
             navigate("/forums")
         }
-
     }
 
 
@@ -64,7 +63,7 @@ const NewPost = ({user}) => {
         style={{ background: "white", borderStyle: "solid" }}
         onChange={(e) => setBody(e.target.value)}>
         </TextField>
-        <Button type="submit">Post!</Button>
+        <Button variant="contained" type="submit">Post!</Button>        
         </form>
         </>
     )

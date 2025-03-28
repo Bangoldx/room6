@@ -8,9 +8,9 @@ public class ForumsDTOMapper {
 
     public static ForumDTO toForumDTO(Forum forum, String body, String title, User user ){
         ForumDTO forumDTO = new ForumDTO();
-        forumDTO.setBody(forumDTO.getBody());
-        forumDTO.setTitle(forumDTO.getTitle());
-        forumDTO.setUser(forumDTO.getUser());
+        forumDTO.setBody(forum.getBody());
+        forumDTO.setTitle(forum.getTitle());
+        forumDTO.setUser(forum.getUser());
 
         return forumDTO;
     };

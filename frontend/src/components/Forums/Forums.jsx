@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { React, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Forum = () => {
@@ -12,10 +12,7 @@ const Forum = () => {
         const getPosts = async () => {
             try {
                 const response = await fetch("http://localhost:8080/forumservices/forums", {
-                    method: "GET",
-                    // credentials: "include",
-                    // headers: {
-                    //     "Content-Type": "application/json",
+                    method: "GET"
                     }
                 );
                 if (response.ok) {
@@ -31,17 +28,21 @@ const Forum = () => {
             }
         }
         getPosts();
-    }, [getPosts()])
+    }, [])
 
     return (
         <>
-        <Button onClick={("/newpost")}>New Post</Button>
             <ul>
-                {post.map((item, index) => (
-                    <li key={index}>{item.title}</li>
+                {post.map((item, id) => (
+                    <Link to={`${id}`}>
+                    <li key={id}>{item.body}</li>
+                    </Link>
                 ))}
             </ul>
-        </>
+            <Link to={"/newpost"}>
+            <Button variant="contained">New Post</Button>
+            </Link>
+            </>
     )
 }
 

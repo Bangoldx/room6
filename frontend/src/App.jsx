@@ -9,6 +9,7 @@ import Student from './components/Student'
 import Tutor from './components/Tutor'
 import Forum from './components/Forums/Forums'
 import NewPost from './components/Forums/NewPost'
+import PostPage from './components/Forums/PostPage'
 
 function App() {
 
@@ -109,6 +110,11 @@ function App() {
             element={<NewPost 
             user={user}/>}>
           </Route>
+          <Route
+            path='/forums/:postId'
+            element={<PostPage
+              />}
+          />
 
         </Routes>
       </Router>

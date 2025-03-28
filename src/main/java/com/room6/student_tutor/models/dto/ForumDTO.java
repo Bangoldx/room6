@@ -14,16 +14,25 @@ public class ForumDTO {
     @Size(min = 30, max = 500, message = "Post must be between 30 and 500 characters")
     private String body;
 
-private User user;
+    private User user;
 
     @NotBlank
     private String commentBody;
 
-    public  String getBody() {
+    public ForumDTO(String title, String body, User user) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
+    }
+
+    public ForumDTO() {
+    }
+
+    public String getBody() {
         return body;
     }
 
-    public void setBody (String body) {
+    public void setBody(String body) {
         this.body = body;
     }
 
@@ -35,11 +44,11 @@ private User user;
         this.commentBody = commentBody;
     }
 
-    public @NotBlank @Size(min = 5, max = 30, message = "Title must be between 5 and 30 characters") String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(@NotBlank @Size(min = 5, max = 30, message = "Title must be between 5 and 30 characters") String title) {
+    public void setTitle (String title) {
         this.title = title;
     }
 
