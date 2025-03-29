@@ -42,10 +42,11 @@ public class ForumController {
         List<ForumDTO> forumDTOS = new ArrayList<>();
 
         for(Forum post : forum){
+            int id = post.getId();
             User user = post.getUser();
             String title = post.getTitle();
             String body = post.getBody();
-            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,body,title,user);
+            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,id,body,title,user);
             forumDTOS.add(forumDTO);
         }
         return forumDTOS;
@@ -54,36 +55,21 @@ public class ForumController {
     @GetMapping("/forums/{postId}")
     public ResponseEntity<?> viewPost(@PathVariable int postId) {
          {
-
             Forum post = forumServices.getPostById(postId).orElse(null);
             if (post == null) {
                 return ResponseEntity.status(404).body("post not found");
             }
-
-            ForumDTO forumDTO = new ForumDTO(post.getTitle(), post.getBody(), null);
+            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody(), post.getUser());
 
             return ResponseEntity.ok(forumDTO);
         }
     }
-//         Optional<Forum> forum = forumServices.getPostById(postId);
-//        return new ForumDTO(forum.getTitle(),forum.getBody(), null).orElse;
-//    };
-//    public ForumDTO viewPost(@PathVariable int postId) {
-//        Optional<Forum> forum = forumRepository.findById(postId);
-//        Forum optForum = new Forum();
-//        if(forum.isPresent()){
-//            optForum = forum.get();
-//        }
-//
-//        return new ForumDTO(optForum.getTitle(), optForum.getBody(), null);
-//    };
 
     @PostMapping("/newpost")
     public ResponseEntity<String> newPost(@RequestBody Forum post) {
         forumRepository.save(post);
         return ResponseEntity.ok("Posted");
     }
-
 
 };
 

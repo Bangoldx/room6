@@ -26,6 +26,7 @@ const Forum = () => {
             } catch (error) {
                 console.log(error);
             }
+
         }
         getPosts();
     }, [])
@@ -34,8 +35,8 @@ const Forum = () => {
         <>
             <ul>
                 {post.map((item, id) => (
-                    <Link to={`${id}`}>
-                    <li key={id}>{item.body}</li>
+                    <Link to={`${item.forumId}`}>
+                    <li key={id}>{item.title}</li>
                     </Link>
                 ))}
             </ul>

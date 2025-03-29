@@ -29,7 +29,7 @@ public class Forum {
     @JoinColumn(name = "forum_id")
     private final List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
 
 //    @ManyToOne
