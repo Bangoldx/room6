@@ -43,10 +43,10 @@ public class ForumController {
 
         for(Forum post : forum){
             int id = post.getId();
-            User user = post.getUser();
+//            User user = post.getUser();
             String title = post.getTitle();
             String body = post.getBody();
-            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,id,body,title,user);
+            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,id,body,title);
             forumDTOS.add(forumDTO);
         }
         return forumDTOS;

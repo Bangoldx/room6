@@ -3,19 +3,25 @@ package com.room6.student_tutor.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.Cascade;
+
+
 import java.util.ArrayList;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 
 
 @Entity
+@Table(name = "forums")
 public class Forum {
 
     @TableGenerator(name = "yourTableGenerator", allocationSize = 1, initialValue = 1)
     @Id
     @GeneratedValue(strategy=GenerationType.TABLE, generator="yourTableGenerator")
-    private Integer id;
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @NotBlank
     @Size(min = 5, max = 50, message = "Title must be between 5 and 50 characters")
@@ -25,21 +31,11 @@ public class Forum {
     @Size(min = 5, max = 650, message = "Post must be between 5 and 650 characters")
     private String body;
 
-    @OneToMany
-    @JoinColumn(name = "forum_id")
-    private final List<Comment> comments = new ArrayList<>();
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private User user;
-
-//    @ManyToOne
-//    private String postedDate;
 
     public Forum(String body, String title, User user) {
         this.body = body;
         this.title = title;
         this.user = user;
-//        this.postedDate = postedDate;
     }
 
     public Forum() {
@@ -69,9 +65,9 @@ public class Forum {
         this.title = title;
     }
 
-    public List<Comment> getComment() {
-        return comments;
-    }
+//    public List<Comment> getComment() {
+//        return comments;
+//    }
 
     public User getUser() {
         return user;
@@ -81,11 +77,4 @@ public class Forum {
         this.user = user;
     }
 
-//    public String getPostedDate() {
-//        return postedDate;
-//    }
-//
-//    public void setPostedDate(String postedDate) {
-//        this.postedDate = postedDate;
-//    }
 }

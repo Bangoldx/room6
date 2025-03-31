@@ -16,10 +16,10 @@ public class ForumDTO {
     @Size(min = 30, max = 500, message = "Post must be between 30 and 500 characters")
     private String body;
 
-    private User user;
-
     @NotBlank
     private String commentBody;
+
+    private User user;
 
     public ForumDTO(int forumId,String title, String body, User user) {
         this.forumId = forumId;
@@ -55,19 +55,19 @@ public class ForumDTO {
         this.title = title;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public int getForumId() {
         return forumId;
     }
 
     public void setForumId(int forumId) {
         this.forumId = forumId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

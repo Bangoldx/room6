@@ -61,11 +61,11 @@ public abstract class AbstractUser {
 
     public void setUsername(String username) {this.username = username;}
 
-    public String getPwHash() {
+    public @NotNull String getPwHash() {
         return pwHash;
     }
 
-    public void setPwHash(String pwHash) {
+    public void setPwHash(@NotNull String pwHash) {
         this.pwHash = pwHash;
     }
 
@@ -97,10 +97,10 @@ public abstract class AbstractUser {
         return id == that.id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hashCode(id);
+//    }
 
 
 }
