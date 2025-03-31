@@ -154,11 +154,11 @@ const Signup = () => {
                             <FormLabel>Subjects</FormLabel>
                                 <FormGroup 
                                 onChange={(e) => setSubjects([...subjects, e.target.value])}>
-                                    <FormControlLabel value="math" control={<Checkbox />} label="Math" />
-                                    <FormControlLabel value="science" control={<Checkbox />} label="Science" />
-                                    <FormControlLabel value="language" control={<Checkbox />} label="Language" />
-                                    <FormControlLabel value="history" control={<Checkbox />} label="History" />
-                                    <FormControlLabel value="social studies" control={<Checkbox />} label="Social Studies" />
+                                    <FormControlLabel value="Math" control={<Checkbox />} label="Math" />
+                                    <FormControlLabel value="Science" control={<Checkbox />} label="Science" />
+                                    <FormControlLabel value="Language" control={<Checkbox />} label="Language" />
+                                    <FormControlLabel value="History" control={<Checkbox />} label="History" />
+                                    <FormControlLabel value="Social studies" control={<Checkbox />} label="Social Studies" />
                                 </FormGroup>
                             </Grid2>
                             <Grid2 size={{ xs: 12, sm: 6 }} >

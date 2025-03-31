@@ -7,6 +7,9 @@ import NavBar from './components/NavBar/Navbar'
 import Login from './components/Authentication/Login'
 import Student from './components/Student'
 import Tutor from './components/Tutor'
+import Forum from './components/Forums/Forums'
+import NewPost from './components/Forums/NewPost'
+import PostPage from './components/Forums/PostPage'
 
 function App() {
 
@@ -19,7 +22,7 @@ function App() {
       setSessionData(JSON.parse(storedData));
       setUser(JSON.parse(storedData));
     }
-    
+
   }, []);
 
   const refreshUser = async () => {
@@ -68,41 +71,57 @@ function App() {
   return (
     <>
       <Router>
-      <NavBar  
-      user={user}
-      logoutUser={logoutUser}/>
-          
+        <NavBar
+          user={user}
+          logoutUser={logoutUser} />
         <br />
         <br />
         <Routes>
 
           <Route path='/'
-          element={<Landing />}>
+            element={<Landing />}>
           </Route>
 
           <Route path='signup'
-          element={<Signup />}>
+            element={<Signup />}>
           </Route>
 
           <Route path='login'
-          element={<Login 
-            refreshUser={refreshUser}
-            user={user}/>}>
+            element={<Login
+              refreshUser={refreshUser}
+              user={user} />}>
           </Route>
 
           <Route path='student'
-          element={<Student 
-            user={user}/>}>
+            element={<Student
+              user={user}
+              refreshUser={refreshUser} />}>
           </Route>
 
           <Route path='tutor'
-          element={<Tutor 
+            element={<Tutor
+              user={user}
+              refreshUser={refreshUser} />}>
+          </Route>
+          <Route path='forums'
+            element={<Forum />}>
+          </Route>
+          <Route path='newpost'
+            element={<NewPost 
             user={user}/>}>
           </Route>
-          
+          <Route
+            path='/forums/:postId'
+            element={<PostPage
+              />}
+          />
+
         </Routes>
       </Router>
-      
+
+<br />
+<br />
+      <footer>&copy; Drew Williams @ Dais</footer>
     </>
   )
 }

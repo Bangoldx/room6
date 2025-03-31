@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react'
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Card, CardContent, Typography, Grid2 } from '@mui/material';
 // import { Link } from 'react-router';
 
@@ -54,62 +54,57 @@ const Login = ({ refreshUser, user }) => {
         }
     };
 
-    if (user.role === "student") {
-        navigate("/student")
-    } else if (user.role === "tutor") {
-        navigate("/tutor")
-    }
-
-    return (
-        <div>
+    if (!user) {
+        return (
+            <div>
 
 
-            <Card style={{ maxWidth: 450, margin: "0 auto", padding: "0px 5px" }} sx={{ bgcolor: '#F2E8DC' }}>
-                <CardContent sx={{ bgcolor: '#F2E8DC' }}>
-                    <Typography variant='h4' gutterBottom style={{ color: '#223843' }}>Sign in</Typography>
-                    <form onSubmit={handleSubmit}>
-                        <Grid2 container spacing={1}>
+                <Card style={{ maxWidth: 450, margin: "0 auto", padding: "0px 5px" }} sx={{ bgcolor: '#F2E8DC' }}>
+                    <CardContent sx={{ bgcolor: '#F2E8DC' }}>
+                        <Typography variant='h4' gutterBottom style={{ color: '#223843' }}>Sign in</Typography>
+                        <form onSubmit={handleSubmit}>
+                            <Grid2 container spacing={1}>
 
-                            <Grid2 size={{ xs: 12, sm: 6 }} item='true'>
-                                <TextField
-                                    required
-                                    id="outlined-required"
-                                    label="Username"
-                                    value={username}
-                                    style={{ background: "white", borderStyle: "solid" }}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
+                                <Grid2 size={{ xs: 12, sm: 6 }} item='true'>
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="Username"
+                                        value={username}
+                                        style={{ background: "white", borderStyle: "solid" }}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                </Grid2>
+
+                                <Grid2 size={{ xs: 12, sm: 6 }} item='true'>
+                                    <TextField
+                                        required
+                                        id="outlined-password-input"
+                                        label="Password"
+                                        type="password"
+                                        autoComplete="current-password"
+                                        value={password}
+                                        style={{ background: "white", borderStyle: "solid" }}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </Grid2>
+
+                                <Grid2 size={{ xs: 12 }} item='true'>
+                                    <Button type="submit" variant="contained">Sign in!</Button>
+                                </Grid2>
+
+                                <Grid2 size={{ xs: 12 }} item='true'>
+                                    <a id="forgot" href="/forgotpassword" style={{ color: '#223843' }}><u>Forgot your password? Click here!</u></a>
+                                </Grid2>
+
                             </Grid2>
+                        </form>
+                    </CardContent>
+                </Card>
+                <br />
+                <span style={{ color: '#223843' }}>Don't have an account?</span>
 
-                            <Grid2 size={{ xs: 12, sm: 6 }} item='true'>
-                                <TextField
-                                    required
-                                    id="outlined-password-input"
-                                    label="Password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    value={password}
-                                    style={{ background: "white", borderStyle: "solid" }}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </Grid2>
-
-                            <Grid2 size={{ xs: 12 }} item='true'>
-                                <Button type="submit" variant="contained">Sign in!</Button>
-                            </Grid2>
-
-                            <Grid2 size={{ xs: 12 }} item='true'>
-                                <a id="forgot" href="/forgotpassword" style={{ color: '#223843' }}><u>Forgot your password? Click here!</u></a>
-                            </Grid2>
-
-                        </Grid2>
-                    </form>
-                </CardContent>
-            </Card>
-            <br />
-            <span style={{ color: '#223843' }}>Don't have an account?</span>
-
-            {/* <div>
+                {/* <div>
         <Box display="flex"
           margin={'auto'}>
           <Box margin={'auto'}>
@@ -125,9 +120,14 @@ const Login = ({ refreshUser, user }) => {
           </Box>
         </Box>
       </div> */}
-        </div>
+            </div>
 
-    )
+        )
+    } else if (user.role === "student") {
+        navigate("/student")
+    } else if (user.role === "tutor") {
+        navigate("/tutor")
+    }
 }
 
 export default Login;
