@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Box, TextField, Stack, Rating, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
-const NewPost = ({user}) => {
+const NewPost = ({ user }) => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [error, setError] = useState("");
@@ -15,25 +15,28 @@ const NewPost = ({user}) => {
 
         const response = await fetch("http://localhost:8080/forumservices/newpost", {
             method: "POST",
-            headers:{
-                "Content-Type" : "application/json",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+                
             },
-            body: 
-            JSON.stringify({
-                user,
-                title,
-                body
-            }),
+            body:
+                JSON.stringify({
+                    // user,
+                    title,
+                    body
+                }),
         });
 
         const results = await response.text();
 
-        if(response.status === 400){
+        if (response.status === 400) {
             setError(results);
             console.lot(error);
             setBody("");
             setTitle("");
-        } else{
+        } else {
+            console.log(user)
             setBody("");
             setTitle("");
             navigate("/forums")
@@ -43,28 +46,28 @@ const NewPost = ({user}) => {
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
-        <TextField
-        aria-label="minimum height"
-        fullWidth
-        // multiline rows={3}
-        placeholder="Title"
-        value={title}
-        style={{ background: "white", borderStyle: "solid" }}
-        onChange={(e) => setTitle(e.target.value)}>
-        </TextField>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                    aria-label="minimum height"
+                    fullWidth
+                    // multiline rows={3}
+                    placeholder="Title"
+                    value={title}
+                    style={{ background: "white", borderStyle: "solid" }}
+                    onChange={(e) => setTitle(e.target.value)}>
+                </TextField>
 
-        <TextField
-        aria-label="minimum height"
-        fullWidth
-        multiline rows={3}
-        placeholder="Post"
-        value={body}
-        style={{ background: "white", borderStyle: "solid" }}
-        onChange={(e) => setBody(e.target.value)}>
-        </TextField>
-        <Button variant="contained" type="submit">Post!</Button>        
-        </form>
+                <TextField
+                    aria-label="minimum height"
+                    fullWidth
+                    multiline rows={3}
+                    placeholder="Post"
+                    value={body}
+                    style={{ background: "white", borderStyle: "solid" }}
+                    onChange={(e) => setBody(e.target.value)}>
+                </TextField>
+                <Button variant="contained" type="submit">Post!</Button>
+            </form>
         </>
     )
 }

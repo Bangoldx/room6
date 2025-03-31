@@ -15,7 +15,6 @@ const PostPage = () => {
             );
             if (response.ok) {
                 const forumData = await response.json();
-                console.log(forumData);
                 setPost(forumData);
             } else {
                 console.error("Failed to retrieve post");
