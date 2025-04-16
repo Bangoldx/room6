@@ -26,6 +26,9 @@ public class UserDTO {
         this.subjects = subjects;
     }
 
+    public UserDTO() {
+    }
+
     public String getUsername() {
         return username;
     }

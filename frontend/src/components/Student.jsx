@@ -10,7 +10,7 @@ import { sizing } from '@mui/system';
 const Student = ({ user, refreshUser }) => {
 
     const navigate = useNavigate();
-    const subjects = user.subjects;
+    // const subjects = user.subjects;
 
     return (
         <>
@@ -25,7 +25,7 @@ const Student = ({ user, refreshUser }) => {
                             <h3>My Subjects</h3>
                             <hr />
                             <ul>
-                                {subjects.map((item, index) => (
+                                {user.subjects.map((item, index) => (
                                     <a href="sujects/"{...item}><li key={index}>{item}</li></a>
                                 ))}
                             </ul>
