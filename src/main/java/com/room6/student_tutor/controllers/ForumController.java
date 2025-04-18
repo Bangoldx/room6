@@ -62,7 +62,7 @@ public class ForumController {
             if (post == null) {
                 return ResponseEntity.status(404).body("post not found");
             }
-            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody(), post.getUser());
+            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody());
 
             return ResponseEntity.ok(forumDTO);
         }

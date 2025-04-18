@@ -11,6 +11,7 @@ import Forum from './components/Forums/Forums'
 import NewPost from './components/Forums/NewPost'
 import PostPage from './components/Forums/PostPage'
 import Admin from './components/Admin'
+import Dashboard from './components/Dashboard'
 
 function App() {
 
@@ -124,6 +125,11 @@ function App() {
             element={<PostPage
             />}
           />
+
+          <Route path='dashboard'
+            element={<Dashboard
+              user={user} />}>
+          </Route>
 
         </Routes>
       </Router>

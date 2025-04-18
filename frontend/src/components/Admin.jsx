@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -10,8 +10,8 @@ const Admin = ({ user }) => {
 
     const [users, setUsers] = useState([]);
     const [post, setPost] = useState([]);
-    const [students, setStudents] = useState([]);
-    const [tutors, setTutors] = useState([]);
+    let students = [];
+    let tutors = [];
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,7 +36,15 @@ const Admin = ({ user }) => {
         getUsers();
     }, [])
 
-
+        users.forEach(user => {
+            for (let role in user) {
+                if (user[role] === "student") {
+                    students.push(user)
+                } else if (user[role] === "tutor") {
+                    tutors.push(user)
+                }
+            }
+        })
 
     useEffect(() => {
         const getPosts = async () => {
@@ -62,22 +70,28 @@ const Admin = ({ user }) => {
 
 
 
-    users.forEach(user => {
-        for (let role in user) {
-            if (user[role] === "student") {
-                students.push(user)
-            } else if (user[role] === "tutor") {
-                tutors.push(user)
-            }
-        }
-    })
+        
 
+
+    // organizeUsers(users);
 
     return (
         <>
             <h1>Welcome {user.firstName}, You have all the power!</h1>
             <Container sx={{ width: 1 }}>
                 <Grid2 container spacing={2}>
+
+                    <Card
+                        sx={{ width: 322 }}>
+                        <h3>Users</h3>
+                        <hr />
+                        <ul>
+                            {users.map((item, id) => (
+                                <li key={id}>{item.username}</li>
+                            ))}
+                        </ul>
+                    </Card>
+
                     <Grid2>
                         <Card
                             sx={{ width: 322 }}>
@@ -109,7 +123,7 @@ const Admin = ({ user }) => {
                             <hr />
                             <ul>
                                 {post.map((item, id) => (
-                                    <Link to={`${item.forumId}`}>
+                                    <Link to={`/forums/${item.forumId}`}>
                                         <li key={id}>{item.title}</li>
                                     </Link>
                                 ))}
