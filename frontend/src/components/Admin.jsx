@@ -36,16 +36,6 @@ const Admin = ({ user }) => {
         getUsers();
     }, [])
 
-        users.forEach(user => {
-            for (let role in user) {
-                if (user[role] === "student") {
-                    students.push(user)
-                } else if (user[role] === "tutor") {
-                    tutors.push(user)
-                }
-            }
-        })
-
     useEffect(() => {
         const getPosts = async () => {
             try {
@@ -68,12 +58,13 @@ const Admin = ({ user }) => {
         getPosts();
     }, [])
 
-
-
-        
-
-
-    // organizeUsers(users);
+    users.forEach(user => {
+        if (user.role === "student") {
+            students.push(user);
+        } else if (user.role === "tutor") {
+            tutors.push(user);
+        }
+    });
 
     return (
         <>
@@ -116,6 +107,10 @@ const Admin = ({ user }) => {
                             </ul>
                         </Card>
                     </Grid2>
+                    </Grid2>
+                    <br />
+                    <Grid2 container spacing={2}>
+
                     <Grid2>
                         <Card
                             sx={{ width: 322 }}>
@@ -131,13 +126,13 @@ const Admin = ({ user }) => {
 
                         </Card>
                     </Grid2>
-                    {/* <Grid2>
+                    <Grid2>
                         <Card sx={{ width: 1 }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateCalendar />
                             </LocalizationProvider>
                         </Card>
-                    </Grid2> */}
+                    </Grid2>
                 </Grid2>
             </Container>
         </>

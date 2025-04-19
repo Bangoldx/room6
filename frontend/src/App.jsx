@@ -12,6 +12,8 @@ import NewPost from './components/Forums/NewPost'
 import PostPage from './components/Forums/PostPage'
 import Admin from './components/Admin'
 import Dashboard from './components/Dashboard'
+import Account from './components/Account'
+import Profile from './components/Profile'
 
 function App() {
 
@@ -128,6 +130,14 @@ function App() {
 
           <Route path='dashboard'
             element={<Dashboard
+              user={user} />}>
+          </Route>
+          <Route path='account'
+            element={<Account
+              user={user} />}>
+          </Route>
+          <Route path='profile'
+            element={<Profile
               user={user} />}>
           </Route>
 

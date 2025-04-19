@@ -8,12 +8,14 @@ import com.room6.student_tutor.models.User;
 import com.room6.student_tutor.models.dto.ForumDTO;
 import com.room6.student_tutor.models.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/adminservices")
@@ -50,19 +52,21 @@ public class AdminController {
         return userDTOS;
     }
 
-    @GetMapping("nuke")
-    public String nukeAllUsers(Model model){
-        model.addAttribute("title", "*CAUTION* Nuke Everything?");
-        model.addAttribute("users", tutorRepository.findAll());
-        model.addAttribute("users", studentRepository.findAll());
-        return "admin/nuke";
-    }
 
-    @PostMapping("nuke")
-    public String processDeleteEventsForm(){
-        tutorRepository.deleteAll();
-        studentRepository.deleteAll();
-        userRepository.deleteAll();
-        return "redirect:/";
-    }
+
+//    @GetMapping("nuke")
+//    public String nukeAllUsers(Model model){
+//        model.addAttribute("title", "*CAUTION* Nuke Everything?");
+//        model.addAttribute("users", tutorRepository.findAll());
+//        model.addAttribute("users", studentRepository.findAll());
+//        return "admin/nuke";
+//    }
+//
+//    @PostMapping("nuke")
+//    public String processDeleteEventsForm(){
+//        tutorRepository.deleteAll();
+//        studentRepository.deleteAll();
+//        userRepository.deleteAll();
+//        return "redirect:/";
+//    }
 }
