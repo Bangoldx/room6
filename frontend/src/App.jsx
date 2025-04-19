@@ -10,6 +10,10 @@ import Tutor from './components/Tutor'
 import Forum from './components/Forums/Forums'
 import NewPost from './components/Forums/NewPost'
 import PostPage from './components/Forums/PostPage'
+import Admin from './components/Admin'
+import Dashboard from './components/Dashboard'
+import Account from './components/Account'
+import Profile from './components/Profile'
 
 function App() {
 
@@ -92,6 +96,11 @@ function App() {
               user={user} />}>
           </Route>
 
+          <Route path='admin'
+            element={<Admin
+              user={user} />}>
+          </Route>
+
           <Route path='student'
             element={<Student
               user={user}
@@ -103,24 +112,40 @@ function App() {
               user={user}
               refreshUser={refreshUser} />}>
           </Route>
+
           <Route path='forums'
             element={<Forum />}>
           </Route>
+
           <Route path='newpost'
-            element={<NewPost 
-            user={user}/>}>
+            element={<NewPost
+              user={user} />}>
           </Route>
+
           <Route
             path='/forums/:postId'
             element={<PostPage
-              />}
+            />}
           />
+
+          <Route path='dashboard'
+            element={<Dashboard
+              user={user} />}>
+          </Route>
+          <Route path='account'
+            element={<Account
+              user={user} />}>
+          </Route>
+          <Route path='profile'
+            element={<Profile
+              user={user} />}>
+          </Route>
 
         </Routes>
       </Router>
 
-<br />
-<br />
+      <br />
+      <br />
       <footer>&copy; Drew Williams @ Dais</footer>
     </>
   )

@@ -102,7 +102,7 @@ const Login = ({ refreshUser, user }) => {
                     </CardContent>
                 </Card>
                 <br />
-                <span style={{ color: '#223843' }}>Don't have an account?</span>
+                <span style={{ color: '#223843' }}><a href="signup" class="signup">Don't have an account?</a></span>
 
                 {/* <div>
         <Box display="flex"
@@ -127,6 +127,8 @@ const Login = ({ refreshUser, user }) => {
         navigate("/student")
     } else if (user.role === "tutor") {
         navigate("/tutor")
+    } else if (user.role === "admin") {
+        navigate("/admin")
     }
 }
 

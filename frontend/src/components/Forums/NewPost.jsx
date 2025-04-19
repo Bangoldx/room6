@@ -22,7 +22,7 @@ const NewPost = ({ user }) => {
             },
             body:
                 JSON.stringify({
-                    // user,
+                    user,
                     title,
                     body
                 }),

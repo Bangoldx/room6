@@ -2,6 +2,7 @@ package com.room6.student_tutor.controllers;
 
 import com.room6.student_tutor.data.CommentRepository;
 import com.room6.student_tutor.data.ForumRepository;
+import com.room6.student_tutor.data.UserRepository;
 import com.room6.student_tutor.mappers.ForumsDTOMapper;
 import com.room6.student_tutor.models.Comment;
 import com.room6.student_tutor.models.Forum;
@@ -35,6 +36,8 @@ public class ForumController {
     AuthenticationController authenticationController;
     @Autowired
     ForumServices forumServices;
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/forums")
     public List<ForumDTO> viewForums() {
@@ -59,7 +62,7 @@ public class ForumController {
             if (post == null) {
                 return ResponseEntity.status(404).body("post not found");
             }
-            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody(), post.getUser());
+            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody());
 
             return ResponseEntity.ok(forumDTO);
         }

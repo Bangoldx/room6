@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import getUserInitials from '../../utilities';
 import { useNavigate } from "react-router-dom";
-import { mainNavbarItems } from './consts/navbarItems';
+import { altNavbarItems, mainNavbarItems } from './consts/navbarItems';
 
 const pages = ['Forums', 'Subjects', 'Contact'];
 const settings = ['Dashboard', 'Profile', 'Account'];
@@ -147,59 +147,60 @@ function ResponsiveAppBar({ user, logoutUser }) {
                                 >
                                     {page.label}
                                 </Button>
-                                </Link>
+                            </Link>
                         ))}
-                            </Box>
+                    </Box>
                     {!loggedIn ?
 
-                            <Box sx={{ flexGrow: 0 }}>
-                                <Link style={{ textDecoration: "none", color: "#223843" }} to={`/login`}>
-                                    <Button
-                                        onClick={handleCloseNavMenu}
-                                        sx={{ my: 2, color: '#223843', display: 'block' }}
-                                    >
-                                        Sign In
-                                    </Button>
-                                </Link>
-                            </Box>
-                            :
-                            <Box sx={{ flexGrow: 0 }}>
-                                <Tooltip title="Open settings">
-                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" >
-                                            {initials}
-                                        </Avatar>
-                                    </IconButton>
-                                </Tooltip>
-                                <Menu
-                                    sx={{ mt: '45px' }}
-                                    id="menu-appbar"
-                                    anchorEl={anchorElUser}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(anchorElUser)}
-                                    onClose={handleCloseUserMenu}
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Link style={{ textDecoration: "none", color: "#223843" }} to={`/login`}>
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: '#223843', display: 'block' }}
                                 >
-                                    {settings.map((setting) => (
-                                        // <Link
-                                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                            <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                                    Sign In
+                                </Button>
+                            </Link>
+                        </Box>
+                        :
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" >
+                                        {initials}
+                                    </Avatar>
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {altNavbarItems.map((setting) => (
+                                    <Link key={setting.id} to={`/${setting.path}`}>
+                                        <MenuItem onClick={handleCloseUserMenu}>
+                                            <Typography sx={{ textAlign: 'center',color: "black" }}>{setting.label}</Typography>
                                         </MenuItem>
+                                        </Link>
                                     ))}
-                                    <MenuItem onClick={handleLogoutUserMenu}>
-                                        <Typography sx={{ textAlign: 'center', textDecoration: "none", color: "black" }}>
-                                            Logout
-                                        </Typography>
+                                        <MenuItem onClick={handleLogoutUserMenu}>
+                                            <Typography sx={{ textAlign: 'center', textDecoration: "none", color: "black" }}>
+                                                Logout
+                                            </Typography>
 
-                                    </MenuItem>
-                                </Menu>
+                                        </MenuItem>
+                                    </Menu>
                             </Box>
                     }
                 </Toolbar>
