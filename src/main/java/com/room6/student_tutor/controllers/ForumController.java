@@ -46,7 +46,7 @@ public class ForumController {
 
         for(Forum post : forum){
             int id = post.getId();
-//            User user = post.getUser();
+            User user = post.getUser();
             String title = post.getTitle();
             String body = post.getBody();
             ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,id,body,title);
@@ -62,7 +62,7 @@ public class ForumController {
             if (post == null) {
                 return ResponseEntity.status(404).body("post not found");
             }
-            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody());
+            ForumDTO forumDTO = new ForumDTO(post.getId(),post.getTitle(), post.getBody(), post.getUser());
 
             return ResponseEntity.ok(forumDTO);
         }
