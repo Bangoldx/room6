@@ -32,7 +32,7 @@ const NewPost = ({ user }) => {
 
         if (response.status === 400) {
             setError(results);
-            console.lot(error);
+            console.log(error);
             setBody("");
             setTitle("");
         } else {

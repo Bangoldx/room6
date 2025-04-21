@@ -72,7 +72,7 @@ public class UserController {
             return ResponseEntity.status(404).body("User not found");
         }
 
-        UserDTO userDTO = new UserDTO(user.getUsername(), user.getFirstName(),user.getLastName(),user.getEmail(),user.getRole(),user.getSubjects());
+        UserDTO userDTO = new UserDTO(user.getUsername(), user.getFirstName(),user.getLastName(),user.getEmail(),user.getRole(),user.getSubjects(), user.getId());
 
         return ResponseEntity.ok(userDTO);
     }

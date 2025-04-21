@@ -15,8 +15,9 @@ public class UserDTO {
     private String email;
     private String role;
     private List<String> subjects;
+    private int id;
 
-    public UserDTO(String username, String firstName, String lastName, String email, String role, List<String> subjects) {
+    public UserDTO(String username, String firstName, String lastName, String email, String role, List<String> subjects, int id) {
         this.username = username;
 //        this.password = password;
         this.firstName = firstName;
@@ -24,6 +25,7 @@ public class UserDTO {
         this.email = email;
         this.role = role;
         this.subjects = subjects;
+        this.id = id;
     }
 
     public UserDTO() {
@@ -83,5 +85,13 @@ public class UserDTO {
 
     public void setSubjects(List<String> subjects) {
         this.subjects = subjects;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
