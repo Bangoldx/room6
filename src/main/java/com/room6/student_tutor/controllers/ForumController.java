@@ -70,9 +70,26 @@ public class ForumController {
 
     @PostMapping("/newpost")
     public ResponseEntity<String> newPost(@RequestBody Forum post) {
+        if (post.getUser() == null) {
+            return ResponseEntity.badRequest().body("User ID is required.");
+        }
+
+        Optional<User> userOpt = userRepository.findById(post.getUser().getId());
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("User not found.");
+        }
+
+        post.setUser(userOpt.get());
         forumRepository.save(post);
         return ResponseEntity.ok("Posted");
     }
+
+
+//    @PostMapping("/newpost")
+//    public ResponseEntity<String> newPost(@RequestBody Forum post) {
+//        forumRepository.save(post);
+//        return ResponseEntity.ok("Posted");
+//    }
 
 };
 
