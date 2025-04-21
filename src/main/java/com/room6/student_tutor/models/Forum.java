@@ -12,9 +12,9 @@ public class Forum {
     @GeneratedValue(strategy=GenerationType.TABLE, generator="yourTableGenerator")
     private int id;
 
-//    @ManyToOne()
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
+    @ManyToOne()
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @NotBlank
     @Size(min = 5, max = 50, message = "Title must be between 5 and 50 characters")
@@ -68,12 +68,12 @@ public class Forum {
 //        return comments;
 //    }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

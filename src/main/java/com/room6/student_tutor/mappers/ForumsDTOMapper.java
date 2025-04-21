@@ -11,6 +11,7 @@ public class ForumsDTOMapper {
         forumDTO.setForumId(forum.getId());
         forumDTO.setBody(forum.getBody());
         forumDTO.setTitle(forum.getTitle());
+        forumDTO.setUser(forum.getUser());
 
         return forumDTO;
     };

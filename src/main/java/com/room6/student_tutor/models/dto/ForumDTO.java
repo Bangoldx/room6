@@ -21,11 +21,11 @@ public class ForumDTO {
 
     private User user;
 
-    public ForumDTO(int forumId,String title, String body) {
+    public ForumDTO(int forumId,String title, String body, User user) {
         this.forumId = forumId;
         this.title = title;
         this.body = body;
-//        this.user = user;
+        this.user = user;
     }
 
     public ForumDTO() {
@@ -63,11 +63,11 @@ public class ForumDTO {
         this.forumId = forumId;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
