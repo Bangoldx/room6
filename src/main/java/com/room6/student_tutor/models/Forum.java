@@ -37,6 +37,10 @@ public class Forum {
 //        this.user = user;
     }
 
+    public Forum(int id){
+        this.id = id;
+    }
+
     public Forum() {
     }
 

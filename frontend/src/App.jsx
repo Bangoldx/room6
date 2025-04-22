@@ -125,6 +125,7 @@ function App() {
           <Route
             path='/forums/:postId'
             element={<PostPage
+            user={user}
             />}
           />
 

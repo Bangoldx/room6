@@ -3,10 +3,12 @@ package com.room6.student_tutor.controllers;
 import com.room6.student_tutor.data.CommentRepository;
 import com.room6.student_tutor.data.ForumRepository;
 import com.room6.student_tutor.data.UserRepository;
+import com.room6.student_tutor.mappers.CommentDTOMapper;
 import com.room6.student_tutor.mappers.ForumsDTOMapper;
 import com.room6.student_tutor.models.Comment;
 import com.room6.student_tutor.models.Forum;
 import com.room6.student_tutor.models.User;
+import com.room6.student_tutor.models.dto.CommentDTO;
 import com.room6.student_tutor.models.dto.ForumDTO;
 import com.room6.student_tutor.models.dto.UserDTO;
 import com.room6.student_tutor.services.ForumServices;
@@ -49,7 +51,7 @@ public class ForumController {
             User user = post.getUser();
             String title = post.getTitle();
             String body = post.getBody();
-            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,id,body,title);
+            ForumDTO forumDTO = ForumsDTOMapper.toForumDTO(post,id,body,title, user);
             forumDTOS.add(forumDTO);
         }
         return forumDTOS;
@@ -84,42 +86,38 @@ public class ForumController {
         return ResponseEntity.ok("Posted");
     }
 
+    @GetMapping("/forums/{postId}/comments")
+    public List<CommentDTO> getComments(@PathVariable int postId){
+    List<Comment> comments = commentRepository.getByForumId(postId);
+    List<CommentDTO> commentDTOS = new ArrayList<>();
 
-//    @PostMapping("/newpost")
-//    public ResponseEntity<String> newPost(@RequestBody Forum post) {
-//        forumRepository.save(post);
-//        return ResponseEntity.ok("Posted");
-//    }
+    for(Comment comment : comments){
+        Forum forum = comment.getForum();
+        User user = comment.getUser();
+        String body = comment.getBody();
+        int id = comment.getId();
+
+        CommentDTO commentDTO = CommentDTOMapper.toCommentDTO(comment, forum,user, body,id);
+        commentDTOS.add(commentDTO);
+    }
+    return commentDTOS;
+    }
+
+    @PostMapping("/forums/{postId}")
+    public ResponseEntity<String> postNewComment(@RequestBody Comment comment){
+        if (comment.getUser() == null) {
+            return ResponseEntity.badRequest().body("User ID is required.");
+        }
+
+        Optional<User> userOpt = userRepository.findById(comment.getUser().getId());
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("User not found.");
+        }
+
+        comment.setUser(userOpt.get());
+        commentRepository.save(comment);
+        return ResponseEntity.ok("Posted");
+    }
 
 };
 
-//    @GetMapping("post")
-//    public String postTopic(HttpServletRequest request, Model model) {
-//        HttpSession session = request.getSession();
-//        User theUser = authenticationController.getUserFromSession(session);
-//        model.addAttribute(new Forum());
-//        model.addAttribute("user", theUser);
-//        return "forum/post";
-//    }
-
-//    @PostMapping("forums/{postId}")
-//    public String processNewComments(@ModelAttribute @Valid Comment newComment, HttpServletRequest request, Model model, @PathVariable int postId) {
-//        HttpSession session = request.getSession();
-//        User theUser = authenticationController.getUserFromSession(session);
-//        model.addAttribute("user", theUser);
-//
-//        Optional<Forum> optPost = forumRepository.findById(postId);
-//        if (optPost.isPresent()) {
-//            Forum post = optPost.get();
-//            model.addAttribute("post", post);
-//            model.addAttribute(new Comment());
-//
-//            commentRepository.save(newComment);
-//            return "forum/view";
-//        } else {
-//            return "redirect:../";
-//        }
-//    }
-
-
-//}
