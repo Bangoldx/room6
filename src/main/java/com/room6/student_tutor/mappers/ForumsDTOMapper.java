@@ -6,7 +6,7 @@ import com.room6.student_tutor.models.dto.ForumDTO;
 
 public class ForumsDTOMapper {
 
-    public static ForumDTO toForumDTO(Forum forum, int id,String body, String title ){
+    public static ForumDTO toForumDTO(Forum forum, int id,String body, String title, User user ){
         ForumDTO forumDTO = new ForumDTO();
         forumDTO.setForumId(forum.getId());
         forumDTO.setBody(forum.getBody());

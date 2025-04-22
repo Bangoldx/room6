@@ -52,4 +52,12 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
 }
