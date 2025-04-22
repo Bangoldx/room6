@@ -41,10 +41,6 @@ const Comment = ({ post, user }) => {
             return () => clearTimeout(timeout);
         }, [postId]);
 
-        // useEffect(() => {
-        //     fetchComments
-        // }, [postId])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 

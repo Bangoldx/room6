@@ -105,6 +105,16 @@ public class ForumController {
 
     @PostMapping("/forums/{postId}")
     public ResponseEntity<String> postNewComment(@RequestBody Comment comment){
+        if (comment.getUser() == null) {
+            return ResponseEntity.badRequest().body("User ID is required.");
+        }
+
+        Optional<User> userOpt = userRepository.findById(comment.getUser().getId());
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("User not found.");
+        }
+
+        comment.setUser(userOpt.get());
         commentRepository.save(comment);
         return ResponseEntity.ok("Posted");
     }

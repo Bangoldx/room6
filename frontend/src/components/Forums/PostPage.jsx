@@ -66,7 +66,8 @@ const PostPage = ({ user }) => {
                     </Box>
                     <br />
                     <Comment 
-                    post={post}/>
+                    post={post}
+                    user={user}/>
                 </Card>
             </Container>        </>
     )
