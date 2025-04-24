@@ -18,12 +18,9 @@ public abstract class AbstractUser {
     private String email;
     private String role = "student";
     private String username;
-
     @NotNull
     private String pwHash;
-
     private List<String> subjects;
-
     private String resetToken;
     private LocalDateTime tokenExpirationDate;
 

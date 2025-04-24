@@ -2,6 +2,7 @@ package com.room6.student_tutor.controllers;
 
 import com.room6.student_tutor.data.UserRepository;
 import com.room6.student_tutor.services.PasswordResetServices;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class PasswordResetController {
     private UserRepository userRepository;
 
     @PostMapping("/forgotpassword")
-    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) throws MessagingException {
         passwordResetServices.sendResetToken(email);
         return ResponseEntity.ok("Email sent");
     }

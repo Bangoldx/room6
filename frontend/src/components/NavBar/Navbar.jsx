@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import getUserInitials from '../../utilities';
 import { useNavigate } from "react-router-dom";
 import { altNavbarItems, mainNavbarItems } from './consts/navbarItems';
+import { TextField } from '@mui/material';
 
 const pages = ['Forums', 'Subjects', 'Contact'];
 const settings = ['Dashboard', 'Profile', 'Account'];
@@ -150,6 +151,12 @@ function ResponsiveAppBar({ user, logoutUser }) {
                             </Link>
                         ))}
                     </Box>
+
+                    {/* <Box justifyContent={"center"}>
+                        <TextField sx={{background:"white", borderRadius:"5%"}}></TextField>
+                        <Button sx={{background:"white"}}>Search</Button>
+                    </Box>
+                     */}
                     {!loggedIn ?
 
                         <Box sx={{ flexGrow: 0 }}>
