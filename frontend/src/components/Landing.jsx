@@ -5,27 +5,6 @@ const Landing = () => {
 
     return (
         <>
-            {/* <div id="top"> */}
-            {/* <!-- Nav Bar --> */}
-            {/* <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-                        <a class="navbar-brand nav-item" href="#top">Room 6</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-                            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#about">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#signup">Sign up!</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav> */}
-            {/* </div> */}
             <div class="hero-image">
                 <div class="hero-text">
                     <Hero />
@@ -58,7 +37,6 @@ const Landing = () => {
                 </p>
             </div>
 
-            {/* <footer th:replace="~{fragments :: footer}"></footer> */}
         </>
     );
 }

@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,13 +16,16 @@ public abstract class AbstractUser {
     private String firstName;
     private String lastName;
     private String email;
-    private String role;
+    private String role = "student";
     private String username;
 
     @NotNull
     private String pwHash;
 
     private List<String> subjects;
+
+    private String resetToken;
+    private LocalDateTime tokenExpirationDate;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role, List<String> subjects) {
@@ -97,10 +101,19 @@ public abstract class AbstractUser {
         return id == that.id;
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hashCode(id);
-//    }
+    public LocalDateTime getTokenExpirationDate() {
+        return tokenExpirationDate;
+    }
 
+    public void setTokenExpirationDate(LocalDateTime tokenExpirationDate) {
+        this.tokenExpirationDate = tokenExpirationDate;
+    }
 
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
 }

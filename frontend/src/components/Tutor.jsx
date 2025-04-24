@@ -10,7 +10,6 @@ import { sizing } from '@mui/system';
 const Tutor = ({ user, refreshUser }) => {
 
     const navigate = useNavigate();
-    // const subjects = user.subjects;
 
     return (
         <>

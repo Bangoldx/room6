@@ -38,24 +38,26 @@ const PostPage = ({ user }) => {
         ...theme.typography.body2,
         padding: theme.spacing(1),
         textAlign: 'left',
+        width: "90%",
         color: theme.palette.text.secondary,
         ...theme.applyStyles('dark', {
             backgroundColor: '#1A2027',
         }),
     }));
-    console.log(post)
 
     return (
         <>
-            <Container maxWidth={false}>
+            <Container sx={{ maxWidth: false }}>
                 <Card sx={{ backgroundColor: '#7EA8BE' }}>
-                    <Box sx={{ m: 2 }}>
+                    <Box
+                        fullwidth
+                        sx={{ m: 2 }}>
 
                         <Stack spacing={0} padding={1} key={post.id} >
                             <Item sx={{ display: 'flex', alignItems: 'left', justifyContent: 'space-between', backgroundColor: '#F2E8DC', border: '1px solid black' }}>
                                 {/* <Avatar src={post.user.profileUrl} sx={{ width: 24, height: 24 }}></Avatar> */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexGrow: 1 }}>
-                                    <h1>{post.title}</h1> 
+                                    <h1>{post.title}</h1>
                                     {/* {<Rating name="read-only" precision={0.5} defaultValue={0} value={review.rating} readOnly sx={{ ml: 1,  }} />}
                     ({review.rating}) */}
                                 </Box>
@@ -65,9 +67,9 @@ const PostPage = ({ user }) => {
 
                     </Box>
                     <br />
-                    <Comment 
-                    post={post}
-                    user={user}/>
+                    <Comment
+                        post={post}
+                        user={user} />
                 </Card>
             </Container>        </>
     )

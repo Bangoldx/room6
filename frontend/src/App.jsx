@@ -14,6 +14,8 @@ import Admin from './components/xx/Admin'
 import Dashboard from './components/Dashboard'
 import Account from './components/Account'
 import Profile from './components/Profile'
+import PasswordReset from './components/Authentication/PasswordReset'
+import ForgotPassword from './components/Authentication/ForgotPassword'
 
 function App() {
 
@@ -125,7 +127,7 @@ function App() {
           <Route
             path='/forums/:postId'
             element={<PostPage
-            user={user}
+              user={user}
             />}
           />
 
@@ -141,6 +143,14 @@ function App() {
             element={<Profile
               user={user} />}>
           </Route>
+          <Route
+            path='forgotpassword'
+            element={<ForgotPassword />}
+          />
+          <Route
+            path='resetpassword'
+            element={<PasswordReset />}
+          />
 
         </Routes>
       </Router>

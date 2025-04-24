@@ -13,7 +13,7 @@ const Forum = () => {
             try {
                 const response = await fetch("http://localhost:8080/forumservices/forums", {
                     method: "GET"
-                    }
+                }
                 );
                 if (response.ok) {
                     const forumData = await response.json();
@@ -35,14 +35,14 @@ const Forum = () => {
             <ul>
                 {post.map((item, id) => (
                     <Link to={`${item.forumId}`}>
-                    <li key={id}>{item.title}</li>
+                        <li key={id}>{item.title}</li>
                     </Link>
                 ))}
             </ul>
             <Link to={"/newpost"}>
-            <Button variant="contained">New Post</Button>
+                <Button variant="contained">New Post</Button>
             </Link>
-            </>
+        </>
     )
 }
 

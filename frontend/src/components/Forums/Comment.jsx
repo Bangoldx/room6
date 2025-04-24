@@ -4,8 +4,6 @@ import { Button, Box, TextField, Stack, Rating, Typography } from '@mui/material
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-
-
 const Comment = ({ post, user }) => {
     const [comments, setComments] = useState([]);
     const [body, setBody] = useState("");
@@ -15,31 +13,32 @@ const Comment = ({ post, user }) => {
     const { postId } = useParams();
 
 
-        const fetchComments = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/forumservices/forums/${postId}/comments`, {
-                    method: "GET"
-                }
-                );
-                if (response.ok) {
-                    const commentData = await response.json();
-                    setComments(commentData);
-                } else {
-                    console.error("Failed to retrieve post");
-                    setPost([]);
-                }
-            } catch (error) {
-                console.log(error);
+    const fetchComments = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/forumservices/forums/${postId}/comments`, {
+                method: "GET"
             }
-        };
-     
-        useEffect(() => {
-            const timeout = setTimeout(() => {
-                fetchComments();
-            }, 10);
-        
-            return () => clearTimeout(timeout);
-        }, [postId]);
+            );
+            if (response.ok) {
+                const commentData = await response.json();
+                setComments(commentData);
+            } else {
+                console.error("Failed to retrieve post");
+                setPost([]);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            fetchComments();
+        }, 10);
+
+        return () => clearTimeout(timeout);
+    }, [postId]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -79,9 +78,6 @@ const Comment = ({ post, user }) => {
             backgroundColor: '#1A2027',
         }),
     }));
-
-
-    console.log(comments)
 
     return (
         <>

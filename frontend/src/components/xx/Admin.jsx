@@ -107,9 +107,9 @@ const Admin = ({ user }) => {
                             </ul>
                         </Card>
                     </Grid2>
-                    </Grid2>
-                    <br />
-                    <Grid2 container spacing={2}>
+                </Grid2>
+                <br />
+                <Grid2 container spacing={2}>
 
                     <Grid2>
                         <Card

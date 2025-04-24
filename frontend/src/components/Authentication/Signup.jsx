@@ -11,14 +11,13 @@ const Signup = () => {
     const [username, setUsername] = useState("");
     const [pwHash, setPassword] = useState("");
     const [verify, setVerify] = useState("");
-    const [role, setRole] = useState("");
     const [subjects, setSubjects] = useState([]);
     const [error, setError] = useState("");
     const [passwordMatchMessage, setPasswordMatchMessage] = useState("");
-
+    const role = "student";
     const navigate = useNavigate();
 
-      useEffect(() => {
+    useEffect(() => {
         if (verify && pwHash !== verify) {
             setPasswordMatchMessage("Passwords do not match");
         } else {
@@ -149,7 +148,7 @@ const Signup = () => {
                             </Grid2>
                         </Grid2>
 
-                        <Grid2 container spacing={1}>
+                        {/* <Grid2 container spacing={1}>
                             <Grid2 size={{ xs: 12, sm: 6 }} >
                             <FormLabel>Subjects</FormLabel>
                                 <FormGroup 
@@ -174,7 +173,7 @@ const Signup = () => {
                                     </RadioGroup>
                                 </FormControl>
                             </Grid2>
-                        </Grid2>
+                        </Grid2> */}
 
                         <Grid2 size={{ xs: 12 }} >
 

@@ -18,7 +18,7 @@ const NewPost = ({ user }) => {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                
+
             },
             body:
                 JSON.stringify({
@@ -66,6 +66,7 @@ const NewPost = ({ user }) => {
                     style={{ background: "white", borderStyle: "solid" }}
                     onChange={(e) => setBody(e.target.value)}>
                 </TextField>
+                <br />
                 <Button variant="contained" type="submit">Post!</Button>
             </form>
         </>
