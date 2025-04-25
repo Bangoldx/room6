@@ -20,8 +20,9 @@ const Hero = ({ }) => {
                     color: 'black',
                     textAlign: 'center',
                 }}>
-                    <h1>Welcome to Room 6</h1>
-                    <h3>A Place for learning!</h3>
+                    <h1>Room6</h1>
+                    <h2>Where Curiosity Meets Community.</h2>
+                    
                 </div>
             </div>
         </>

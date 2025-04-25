@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, Box, TextField, Stack, Rating, Typography, Container, Card, } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { Button, Box, TextField, Stack, Rating, Typography, Container, Card, styled, Paper } from '@mui/material';
+// import { styled } from '@mui/material/styles';
+// import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Comment from "./Comment";
 
@@ -66,12 +66,13 @@ const PostPage = ({ user }) => {
                         </Stack>
 
                     </Box>
-                    <br />
+                    {/* <br /> */}
                     <Comment
                         post={post}
                         user={user} />
                 </Card>
-            </Container>        </>
+            </Container>
+        </>
     )
 }
 export default PostPage;

@@ -152,11 +152,11 @@ function ResponsiveAppBar({ user, logoutUser }) {
                         ))}
                     </Box>
 
-                    {/* <Box justifyContent={"center"}>
-                        <TextField sx={{background:"white", borderRadius:"5%"}}></TextField>
-                        <Button sx={{background:"white"}}>Search</Button>
-                    </Box>
-                     */}
+                    {/* <Box sx={{justifyContent:"center", marginRight:"30%"}}>
+                        <TextField  sx={{background:"white", borderRadius:"5px"}}></TextField>
+                        <Button sx={{background:"white", marginTop:"6.5%"}}>Search</Button>
+                    </Box> */}
+                    
                     {!loggedIn ?
 
                         <Box sx={{ flexGrow: 0 }}>

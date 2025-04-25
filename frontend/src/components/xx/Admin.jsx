@@ -74,7 +74,7 @@ const Admin = ({ user }) => {
 
                     <Card
                         sx={{ width: 322 }}>
-                        <h3>Users</h3>
+                        <h3>Users | {users.length}</h3>
                         <hr />
                         <ul>
                             {users.map((item, id) => (
@@ -86,7 +86,7 @@ const Admin = ({ user }) => {
                     <Grid2>
                         <Card
                             sx={{ width: 322 }}>
-                            <h3>Students</h3>
+                            <h3>Students | {students.length}</h3>
                             <hr />
                             <ul>
                                 {students.map((item, index) => (
@@ -98,7 +98,7 @@ const Admin = ({ user }) => {
                     <Grid2>
                         <Card
                             sx={{ width: 322 }}>
-                            <h3>Tutors</h3>
+                            <h3>Tutors | {tutors.length}</h3>
                             <hr />
                             <ul>
                                 {tutors.map((item, index) => (
@@ -114,7 +114,7 @@ const Admin = ({ user }) => {
                     <Grid2>
                         <Card
                             sx={{ width: 322 }}>
-                            <h3>Posts</h3>
+                            <h3>Posts | {post.length}</h3>
                             <hr />
                             <ul>
                                 {post.map((item, id) => (
@@ -126,13 +126,13 @@ const Admin = ({ user }) => {
 
                         </Card>
                     </Grid2>
-                    <Grid2>
+                    {/* <Grid2>
                         <Card sx={{ width: 1 }}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateCalendar />
                             </LocalizationProvider>
                         </Card>
-                    </Grid2>
+                    </Grid2> */}
                 </Grid2>
             </Container>
         </>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { ThemeProvider, createTheme } from '@mui/material';
+
 import Signup from './components/Authentication/Signup'
 import Landing from './components/Landing'
 import NavBar from './components/NavBar/Navbar'
@@ -74,90 +76,144 @@ function App() {
     }
   };
 
+  const theme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#1F2937',
+        contrastText: '#FFFFFF',
+      },
+      secondary: {
+        main: '#3B82F6',
+        contrastText: '#FFFFFF',
+      },
+      success: {
+        main: '#10B981',
+      },
+      background: {
+        default: '#F9FAFB',
+        paper: '#FFFFFF',
+      },
+      text: {
+        primary: '#111827',
+        secondary: '#4B5563',
+      },
+    },
+    typography: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      h1: {
+        fontWeight: 700,
+        fontSize: '2.25rem',
+      },
+      h2: {
+        fontWeight: 600,
+        fontSize: '1.75rem',
+      },
+      button: {
+        textTransform: 'none',
+        fontWeight: 500,
+      },
+    },
+    shape: {
+      borderRadius: 12,
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 12,
+          },
+        },
+      },
+    },
+  });
+
   return (
     <>
-      <Router>
-        <NavBar
-          user={user}
-          logoutUser={logoutUser} />
+      <ThemeProvider theme={theme}>
+        <Router>
+          <NavBar
+            user={user}
+            logoutUser={logoutUser} />
+          <br />
+          <br />
+          <Routes>
+
+            <Route path='/'
+              element={<Landing />}>
+            </Route>
+
+            <Route path='signup'
+              element={<Signup />}>
+            </Route>
+
+            <Route path='login'
+              element={<Login
+                refreshUser={refreshUser}
+                user={user} />}>
+            </Route>
+
+            <Route path='admin'
+              element={<Admin
+                user={user} />}>
+            </Route>
+
+            <Route path='student'
+              element={<Student
+                user={user}
+                refreshUser={refreshUser} />}>
+            </Route>
+
+            <Route path='tutor'
+              element={<Tutor
+                user={user}
+                refreshUser={refreshUser} />}>
+            </Route>
+
+            <Route path='forums'
+              element={<Forum />}>
+            </Route>
+
+            <Route path='newpost'
+              element={<NewPost
+                user={user} />}>
+            </Route>
+
+            <Route
+              path='/forums/:postId'
+              element={<PostPage
+                user={user}
+              />}
+            />
+
+            <Route path='dashboard'
+              element={<Dashboard
+                user={user} />}>
+            </Route>
+            <Route path='account'
+              element={<Account
+                user={user} />}>
+            </Route>
+            <Route path='profile'
+              element={<Profile
+                user={user} />}>
+            </Route>
+            <Route
+              path='forgotpassword'
+              element={<ForgotPassword />}
+            />
+            <Route
+              path='resetpassword'
+              element={<PasswordReset />}
+            />
+
+          </Routes>
+        </Router>
+
         <br />
         <br />
-        <Routes>
-
-          <Route path='/'
-            element={<Landing />}>
-          </Route>
-
-          <Route path='signup'
-            element={<Signup />}>
-          </Route>
-
-          <Route path='login'
-            element={<Login
-              refreshUser={refreshUser}
-              user={user} />}>
-          </Route>
-
-          <Route path='admin'
-            element={<Admin
-              user={user} />}>
-          </Route>
-
-          <Route path='student'
-            element={<Student
-              user={user}
-              refreshUser={refreshUser} />}>
-          </Route>
-
-          <Route path='tutor'
-            element={<Tutor
-              user={user}
-              refreshUser={refreshUser} />}>
-          </Route>
-
-          <Route path='forums'
-            element={<Forum />}>
-          </Route>
-
-          <Route path='newpost'
-            element={<NewPost
-              user={user} />}>
-          </Route>
-
-          <Route
-            path='/forums/:postId'
-            element={<PostPage
-              user={user}
-            />}
-          />
-
-          <Route path='dashboard'
-            element={<Dashboard
-              user={user} />}>
-          </Route>
-          <Route path='account'
-            element={<Account
-              user={user} />}>
-          </Route>
-          <Route path='profile'
-            element={<Profile
-              user={user} />}>
-          </Route>
-          <Route
-            path='forgotpassword'
-            element={<ForgotPassword />}
-          />
-          <Route
-            path='resetpassword'
-            element={<PasswordReset />}
-          />
-
-        </Routes>
-      </Router>
-
-      <br />
-      <br />
-      <footer>&copy; Drew Williams @ Dais</footer>
+        <footer>&copy; Drew Williams @ Dais</footer>
+      </ThemeProvider>
     </>
   )
 }
