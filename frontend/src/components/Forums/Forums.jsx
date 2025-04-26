@@ -1,6 +1,7 @@
-import { Button } from "@mui/material";
 import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container, Paper, Stack, styled, IconButton, Tooltip, ListItem, ListItemText } from '@mui/material';
+
 
 
 const Forum = () => {
@@ -32,13 +33,25 @@ const Forum = () => {
 
     return (
         <>
-            <ul>
+            <Card style={{maxWidth:750, margin:"0 auto"}}>
                 {post.map((item, id) => (
-                    <Link to={`${item.forumId}`}>
-                        <li key={id}>{item.title}</li>
-                    </Link>
+                    <ListItem
+                    divider
+                    // secondaryAction={
+                    //     <Tooltip title="Delete">
+                    //         <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
+                    //             <DeleteIcon />
+                    //         </IconButton>
+                    //     </Tooltip>
+                    // }
+                    >
+                        <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                            <ListItemText primary={item.title} />
+                        </Link>
+                    </ListItem>
                 ))}
-            </ul>
+            </Card>
+            <br />
             <Link to={"/newpost"}>
                 <Button variant="contained">New Post</Button>
             </Link>

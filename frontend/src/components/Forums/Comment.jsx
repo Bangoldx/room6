@@ -88,7 +88,7 @@ const Comment = ({ post, user }) => {
                         <Stack spacing={0} padding={1} key={index} >
                             <Item sx={{ display: 'flex', alignItems: 'left', justifyContent: 'space-between', backgroundColor: '#F2E8DC', border: '1px solid black' }}>
                                 {/* <Avatar src={review.user.profileUrl} sx={{ width: 24, height: 24 }}></Avatar> */}
-                                <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', flexGrow: 1 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', flexGrow: 1, placement:'left-start' }}>
                                     {item.user.username}
                                     {/* {<Rating name="read-only" precision={0.5} defaultValue={0} value={review.rating} readOnly sx={{ ml: 1, }} />} */}
                                     {/* ({review.rating}) */}

@@ -103,6 +103,25 @@ public class ForumController {
     return commentDTOS;
     }
 
+    @GetMapping("/forums/comments")
+    public List<CommentDTO> getAllComments(){
+        Iterable<Comment> comments = commentRepository.findAll();
+        List<CommentDTO> commentDTOS = new ArrayList<>();
+
+        for(Comment comment : comments){
+            Forum forum = comment.getForum();
+            User user = comment.getUser();
+            String body = comment.getBody();
+            int id = comment.getId();
+
+            CommentDTO commentDTO = CommentDTOMapper.toCommentDTO(comment, forum,user, body,id);
+            commentDTOS.add(commentDTO);
+        }
+        return commentDTOS;
+    }
+
+
+
     @PostMapping("/forums/{postId}")
     public ResponseEntity<String> postNewComment(@RequestBody Comment comment){
         if (comment.getUser() == null) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container } from '@mui/material';
+import { useNavigate, Link } from "react-router-dom";
+import {DeleteIcon, EditIcon} from '@mui/icons-material/Delete';
+import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container, Paper, Stack, styled, IconButton, Tooltip, ListItem, ListItemText } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -10,6 +11,77 @@ import { sizing } from '@mui/system';
 const Student = ({ user, refreshUser }) => {
 
     const navigate = useNavigate();
+    const [post, setPost] = useState([]);
+    const [comments, setComments] = useState([]);
+    let userComments = [];
+    let userPosts = [];
+
+
+    useEffect(() => {
+        const getPosts = async () => {
+            try {
+                const response = await fetch("http://localhost:8080/forumservices/forums", {
+                    method: "GET"
+                }
+                );
+                if (response.ok) {
+                    const forumData = await response.json();
+                    setPost(forumData);
+                } else {
+                    console.error("Failed to retrieve posts");
+                    setPost([]);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+        getPosts();
+    }, [])
+
+    post.forEach(post => {
+        if (post.user.id === user.id) {
+            userPosts.push(post)
+        }
+    })
+
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/forumservices/forums/comments`, {
+                    method: "GET"
+                }
+                );
+                if (response.ok) {
+                    const commentData = await response.json();
+                    setComments(commentData);
+                } else {
+                    console.error("Failed to retrieve post");
+                    setPost([]);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchComments();
+    }, [])
+
+    comments.forEach(comment => {
+        if (comment.user.id === user.id) {
+            userComments.push(comment)
+        }
+    })
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: (theme.vars ?? theme).palette.text.secondary,
+        ...theme.applyStyles('dark', {
+            backgroundColor: '#1A2027',
+        }),
+    }));
 
     return (
         <>
@@ -21,20 +93,47 @@ const Student = ({ user, refreshUser }) => {
                     <Grid2>
                         <Card
                             sx={{ width: 322 }}>
-                            <h3>My Subjects</h3>
+                            <h3>My Posts</h3>
                             <hr />
-                            <ul>
-                                {user.subjects.map((item, index) => (
-                                    <a href="sujects/"{...item}><li key={index}>{item}</li></a>
-                                ))}
-                            </ul>
+                            {userPosts.map((item, id) => (
+                                <ListItem
+                                divider
+                                secondaryAction={
+                                  <Tooltip title="Delete">
+                                    <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
+                                      <DeleteIcon />
+                                    </IconButton>
+                                  </Tooltip>
+                                }
+                              >
+                                <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                  <ListItemText primary={item.title} />
+                                </Link>
+                              </ListItem>
+                            ))}
                         </Card>
                     </Grid2>
                     <Grid2>
-                        <Card sx={{ width: 1 }}>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DateCalendar />
-                            </LocalizationProvider>
+                        <Card
+                            sx={{ width: 322 }}>
+                            <h3>My Comments</h3>
+                            <hr />
+                            {userComments.map((item, id) => (
+                                <ListItem
+                                divider
+                                secondaryAction={
+                                  <Tooltip title="Delete">
+                                    <IconButton edge="end" onClick={() => handleDeleteComment(item.forum.id)}>
+                                      <DeleteIcon />
+                                    </IconButton>
+                                  </Tooltip>
+                                }
+                              >
+                                <Link to={`/forums/${item.forum.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                  <ListItemText primary={item.body} />
+                                </Link>
+                              </ListItem>
+                            ))}
                         </Card>
                     </Grid2>
                 </Grid2>

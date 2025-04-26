@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container, styled, Paper, IconButton, Tooltip, ListItem, ListItemText } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -66,6 +68,17 @@ const Admin = ({ user }) => {
         }
     });
 
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: (theme.vars ?? theme).palette.text.secondary,
+        ...theme.applyStyles('dark', {
+            backgroundColor: '#1A2027',
+        }),
+    }));
+
     return (
         <>
             <h1>Welcome {user.firstName}, You have all the power!</h1>
@@ -76,11 +89,22 @@ const Admin = ({ user }) => {
                         sx={{ width: 322 }}>
                         <h3>Users | {users.length}</h3>
                         <hr />
-                        <ul>
-                            {users.map((item, id) => (
-                                <li key={id}>{item.username}</li>
-                            ))}
-                        </ul>
+                        {users.map((item, id) => (
+                            <ListItem
+                                divider
+                                secondaryAction={
+                                    <Tooltip title="Delete">
+                                        <IconButton edge="end" onClick={() => handleDeleteUser(item.forumId)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                }
+                            >
+                                {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
+                                <ListItemText primary={item.username} />
+                                {/* </Link> */}
+                            </ListItem>
+                        ))}
                     </Card>
 
                     <Grid2>
@@ -88,11 +112,23 @@ const Admin = ({ user }) => {
                             sx={{ width: 322 }}>
                             <h3>Students | {students.length}</h3>
                             <hr />
-                            <ul>
-                                {students.map((item, index) => (
-                                    <li key={index}>{item.username}</li>
-                                ))}
-                            </ul>
+
+                            {students.map((item, index) => (
+                                <ListItem
+                                    divider
+                                    secondaryAction={
+                                        <Tooltip title="Delete">
+                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.forumId)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    }
+                                >
+                                    {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
+                                    <ListItemText primary={item.username} />
+                                    {/* </Link> */}
+                                </ListItem>
+                            ))}
                         </Card>
                     </Grid2>
                     <Grid2>
@@ -100,11 +136,22 @@ const Admin = ({ user }) => {
                             sx={{ width: 322 }}>
                             <h3>Tutors | {tutors.length}</h3>
                             <hr />
-                            <ul>
-                                {tutors.map((item, index) => (
-                                    <li key={index}>{item.username}</li>
-                                ))}
-                            </ul>
+                            {tutors.map((item, index) => (
+                                <ListItem
+                                    divider
+                                    secondaryAction={
+                                        <Tooltip title="Delete">
+                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.forumId)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    }
+                                >
+                                    {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
+                                    <ListItemText primary={item.username} />
+                                    {/* </Link> */}
+                                </ListItem>
+                            ))}
                         </Card>
                     </Grid2>
                 </Grid2>
@@ -116,23 +163,24 @@ const Admin = ({ user }) => {
                             sx={{ width: 322 }}>
                             <h3>Posts | {post.length}</h3>
                             <hr />
-                            <ul>
-                                {post.map((item, id) => (
-                                    <Link to={`/forums/${item.forumId}`}>
-                                        <li key={id}>{item.title}</li>
+                            {post.map((item, id) => (
+                                <ListItem
+                                    divider
+                                    secondaryAction={
+                                        <Tooltip title="Delete">
+                                            <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    }
+                                >
+                                    <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                        <ListItemText primary={item.title} />
                                     </Link>
-                                ))}
-                            </ul>
-
+                                </ListItem>
+                            ))}
                         </Card>
                     </Grid2>
-                    {/* <Grid2>
-                        <Card sx={{ width: 1 }}>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DateCalendar />
-                            </LocalizationProvider>
-                        </Card>
-                    </Grid2> */}
                 </Grid2>
             </Container>
         </>
