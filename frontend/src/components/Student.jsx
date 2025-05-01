@@ -6,6 +6,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { sizing } from '@mui/system';
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Student = ({ user, refreshUser }) => {
@@ -94,7 +96,6 @@ const Student = ({ user, refreshUser }) => {
     }));
 
     const handleDeletePost = async (e) => {
-        console.log(e);
         let result = confirm("Are you sure you want to remove this Post?")
         if (result) {
             try {
@@ -104,12 +105,13 @@ const Student = ({ user, refreshUser }) => {
                 });
                 if (response.ok) {
                     console.log(response)
+                    toast.success("Post successfully delete")
+                    getPosts();
                 }
 
             }
             catch (error) { }
 
-            getPosts();
         }
     }
 
@@ -137,6 +139,7 @@ const Student = ({ user, refreshUser }) => {
             <div id="top" class="user-container">
                 <h1>Hello student {user.firstName} {user.lastName}!</h1>
             </div>
+        <ToastContainer position="top-right" autoClose={3000} />
             <Container sx={{ width: 1 }}>
                 <Grid2 container spacing={2}>
                     <Grid2>

@@ -7,6 +7,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Forum from "../Forums/Forums";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Admin = ({ user }) => {
 
@@ -102,12 +104,11 @@ const Admin = ({ user }) => {
                 });
                 if (response.ok) {
                     console.log(response)
+                    toast.success("Post successfully delete")
+                    getPosts();
                 }
-
             }
             catch (error) { }
-
-            getPosts();
         }
     }
 
@@ -121,17 +122,19 @@ const Admin = ({ user }) => {
                 });
                 if (response.ok) {
                     console.log(response)
+                    toast.success("User successfully delete")
+                    getUsers();
                 }
 
             }
             catch (error) { }
-
-            getUsers();
         }
     }
 
     return (
         <>
+            <ToastContainer position="top-right" autoClose={3000} />
+
             <h1>Welcome {user.firstName}, You have all the power!</h1>
             <Container sx={{ width: 1 }}>
                 <Grid2 container spacing={2}>

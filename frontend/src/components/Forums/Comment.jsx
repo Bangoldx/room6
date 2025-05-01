@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button, Box, TextField, Stack, Rating, Typography, Card } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Comment = ({ post, user }) => {
     const [comments, setComments] = useState([]);
@@ -62,7 +64,7 @@ const Comment = ({ post, user }) => {
             console.log(error);
             setBody("");
         } else {
-            alert(result);
+            toast.success("Comment Posted!")
             setBody("");
             fetchComments();
         }
@@ -81,14 +83,15 @@ const Comment = ({ post, user }) => {
 
     return (
         <>
+            <ToastContainer position="top-right" autoClose={3000} />
 
             <Card sx={{ backgroundColor: '#7EA8BE' }}>
                 <Box sx={{ m: 2 }}>
-                {comments.map((item, index) => (
+                    {comments.map((item, index) => (
                         <Stack spacing={0} padding={1} key={index} >
                             <Item sx={{ display: 'flex', alignItems: 'left', justifyContent: 'space-between', backgroundColor: '#F2E8DC', border: '1px solid black' }}>
                                 {/* <Avatar src={review.user.profileUrl} sx={{ width: 24, height: 24 }}></Avatar> */}
-                                <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', flexGrow: 1, placement:'left-start' }}>
+                                <Box sx={{ display: 'flex', alignItems: 'left', justifyContent: 'left', flexGrow: 1, placement: 'left-start' }}>
                                     {item.user.username}
                                     {/* {<Rating name="read-only" precision={0.5} defaultValue={0} value={review.rating} readOnly sx={{ ml: 1, }} />} */}
                                     {/* ({review.rating}) */}
