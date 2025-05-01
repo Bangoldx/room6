@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import {DeleteIcon, EditIcon} from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container, Paper, Stack, styled, IconButton, Tooltip, ListItem, ListItemText } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -17,27 +17,32 @@ const Student = ({ user, refreshUser }) => {
     let userPosts = [];
 
 
-    useEffect(() => {
-        const getPosts = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/forumservices/forums", {
-                    method: "GET"
-                }
-                );
-                if (response.ok) {
-                    const forumData = await response.json();
-                    setPost(forumData);
-                } else {
-                    console.error("Failed to retrieve posts");
-                    setPost([]);
-                }
-            } catch (error) {
-                console.log(error);
+    const getPosts = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/forumservices/forums", {
+                method: "GET"
             }
-
+            );
+            if (response.ok) {
+                const forumData = await response.json();
+                setPost(forumData);
+            } else {
+                console.error("Failed to retrieve posts");
+                setPost([]);
+            }
+        } catch (error) {
+            console.log(error);
         }
-        getPosts();
-    }, [])
+
+    }
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            getPosts();
+        }, 10);
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     post.forEach(post => {
         if (post.user.id === user.id) {
@@ -45,26 +50,31 @@ const Student = ({ user, refreshUser }) => {
         }
     })
 
-    useEffect(() => {
-        const fetchComments = async () => {
-            try {
-                const response = await fetch(`http://localhost:8080/forumservices/forums/comments`, {
-                    method: "GET"
-                }
-                );
-                if (response.ok) {
-                    const commentData = await response.json();
-                    setComments(commentData);
-                } else {
-                    console.error("Failed to retrieve post");
-                    setPost([]);
-                }
-            } catch (error) {
-                console.log(error);
+    const fetchComments = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/forumservices/forums/comments`, {
+                method: "GET"
             }
+            );
+            if (response.ok) {
+                const commentData = await response.json();
+                setComments(commentData);
+            } else {
+                console.error("Failed to retrieve post");
+                setPost([]);
+            }
+        } catch (error) {
+            console.log(error);
         }
-        fetchComments();
-    }, [])
+    }
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            fetchComments();
+        }, 10);
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     comments.forEach(comment => {
         if (comment.user.id === user.id) {
@@ -83,6 +93,45 @@ const Student = ({ user, refreshUser }) => {
         }),
     }));
 
+    const handleDeletePost = async (e) => {
+        console.log(e);
+        let result = confirm("Are you sure you want to remove this Post?")
+        if (result) {
+            try {
+                const response = await fetch(`http://localhost:8080/adminservices/post/${e}`, {
+                    method: "DELETE",
+                    credentials: "include"
+                });
+                if (response.ok) {
+                    console.log(response)
+                }
+
+            }
+            catch (error) { }
+
+            getPosts();
+        }
+    }
+
+    const handleDeleteComment = async (e) => {
+        let result = confirm("Are you sure you want to remove this user?")
+        if (result) {
+            try {
+                const response = await fetch(`http://localhost:8080/adminservices/user/${e}`, {
+                    method: "DELETE",
+                    credentials: "include"
+                });
+                if (response.ok) {
+                    console.log(response)
+                }
+
+            }
+            catch (error) { }
+
+            getUsers();
+        }
+    }
+
     return (
         <>
             <div id="top" class="user-container">
@@ -97,19 +146,19 @@ const Student = ({ user, refreshUser }) => {
                             <hr />
                             {userPosts.map((item, id) => (
                                 <ListItem
-                                divider
-                                secondaryAction={
-                                  <Tooltip title="Delete">
-                                    <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
-                                      <DeleteIcon />
-                                    </IconButton>
-                                  </Tooltip>
-                                }
-                              >
-                                <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
-                                  <ListItemText primary={item.title} />
-                                </Link>
-                              </ListItem>
+                                    divider
+                                    secondaryAction={
+                                        <Tooltip title="Delete">
+                                            <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    }
+                                >
+                                    <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                        <ListItemText primary={item.title} />
+                                    </Link>
+                                </ListItem>
                             ))}
                         </Card>
                     </Grid2>
@@ -120,19 +169,19 @@ const Student = ({ user, refreshUser }) => {
                             <hr />
                             {userComments.map((item, id) => (
                                 <ListItem
-                                divider
-                                secondaryAction={
-                                  <Tooltip title="Delete">
-                                    <IconButton edge="end" onClick={() => handleDeleteComment(item.forum.id)}>
-                                      <DeleteIcon />
-                                    </IconButton>
-                                  </Tooltip>
-                                }
-                              >
-                                <Link to={`/forums/${item.forum.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
-                                  <ListItemText primary={item.body} />
-                                </Link>
-                              </ListItem>
+                                    divider
+                                    secondaryAction={
+                                        <Tooltip title="Delete">
+                                            <IconButton edge="end" onClick={() => handleDeleteComment(item.forum.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Tooltip>
+                                    }
+                                >
+                                    <Link to={`/forums/${item.forum.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                        <ListItemText primary={item.body} />
+                                    </Link>
+                                </ListItem>
                             ))}
                         </Card>
                     </Grid2>

@@ -44,14 +44,26 @@ public class AdminController {
         List<UserDTO> userDTOS = new ArrayList<>();
 
         for(User user : users){
+            int id = user.getId();
             String username = user.getUsername();
             String role = user.getRole();
-            UserDTO userDTO = UserDTOMapper.toUserDTO(user, username, role);
+            UserDTO userDTO = UserDTOMapper.toUserDTO(user, username, role, id);
             userDTOS.add(userDTO);
         }
         return userDTOS;
     }
 
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable int id){
+        userRepository.deleteById(id);
+        return ResponseEntity.ok("User Removed");
+    }
+
+    @DeleteMapping("/post/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable int id){
+        forumRepository.deleteById(id);
+        return ResponseEntity.ok("Post Removed");
+    }
 
 
 //    @GetMapping("nuke")

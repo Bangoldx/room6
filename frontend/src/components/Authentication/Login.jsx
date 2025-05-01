@@ -38,7 +38,6 @@ const Login = ({ refreshUser, user }) => {
                     }),
                 });
             const result = await response.text();
-            console.log(result);
             if (response.ok) {
                 alert(result);
                 refreshUser();

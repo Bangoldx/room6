@@ -16,49 +16,60 @@ const Admin = ({ user }) => {
     let tutors = [];
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const getUsers = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/adminservices/getallusers", {
-                    method: "GET"
-                }
-                );
-                if (response.ok) {
-                    const userData = await response.json();
-                    setUsers(userData);
-                } else {
-                    console.error("Failed to retrieve users");
-                    setUsers([]);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
 
-        getUsers();
-    }, [])
+    const getUsers = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/adminservices/getallusers", {
+                method: "GET"
+            }
+            );
+            if (response.ok) {
+                const userData = await response.json();
+                setUsers(userData);
+            } else {
+                console.error("Failed to retrieve users");
+                setUsers([]);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        const getPosts = async () => {
-            try {
-                const response = await fetch("http://localhost:8080/forumservices/forums", {
-                    method: "GET"
-                }
-                );
-                if (response.ok) {
-                    const forumData = await response.json();
-                    setPost(forumData);
-                } else {
-                    console.error("Failed to retrieve posts");
-                    setPost([]);
-                }
-            } catch (error) {
-                console.log(error);
-            }
+        const timeout = setTimeout(() => {
+            getUsers();
+        }, 10);
 
+        return () => clearTimeout(timeout);
+    }, []);
+
+    const getPosts = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/forumservices/forums", {
+                method: "GET"
+            }
+            );
+            if (response.ok) {
+                const forumData = await response.json();
+                setPost(forumData);
+            } else {
+                console.error("Failed to retrieve posts");
+                setPost([]);
+            }
+        } catch (error) {
+            console.log(error);
         }
-        getPosts();
-    }, [])
+
+    }
+
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            getPosts();
+        }, 10);
+
+        return () => clearTimeout(timeout);
+    }, []);
 
     users.forEach(user => {
         if (user.role === "student") {
@@ -79,6 +90,46 @@ const Admin = ({ user }) => {
         }),
     }));
 
+
+    const handleDeletePost = async (e) => {
+        console.log(e);
+        let result = confirm("Are you sure you want to remove this Post?")
+        if (result) {
+            try {
+                const response = await fetch(`http://localhost:8080/adminservices/post/${e}`, {
+                    method: "DELETE",
+                    credentials: "include"
+                });
+                if (response.ok) {
+                    console.log(response)
+                }
+
+            }
+            catch (error) { }
+
+            getPosts();
+        }
+    }
+
+    const handleDeleteUser = async (e) => {
+        let result = confirm("Are you sure you want to remove this user?")
+        if (result) {
+            try {
+                const response = await fetch(`http://localhost:8080/adminservices/user/${e}`, {
+                    method: "DELETE",
+                    credentials: "include"
+                });
+                if (response.ok) {
+                    console.log(response)
+                }
+
+            }
+            catch (error) { }
+
+            getUsers();
+        }
+    }
+
     return (
         <>
             <h1>Welcome {user.firstName}, You have all the power!</h1>
@@ -94,7 +145,7 @@ const Admin = ({ user }) => {
                                 divider
                                 secondaryAction={
                                     <Tooltip title="Delete">
-                                        <IconButton edge="end" onClick={() => handleDeleteUser(item.forumId)}>
+                                        <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </Tooltip>
@@ -118,7 +169,7 @@ const Admin = ({ user }) => {
                                     divider
                                     secondaryAction={
                                         <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.forumId)}>
+                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </Tooltip>
@@ -141,7 +192,7 @@ const Admin = ({ user }) => {
                                     divider
                                     secondaryAction={
                                         <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.forumId)}>
+                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </Tooltip>
