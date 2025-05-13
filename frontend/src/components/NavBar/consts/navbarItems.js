@@ -8,13 +8,19 @@ export const mainNavbarItems = [
         path: "forums"
     },
     {
-        id: 1,
+        id:1,
+        icon: "",
+        label: "My Subjects",
+        path: "user/subjects"
+    },
+    {
+        id: 2,
         icon: "",
         label: "Subjects",
         path: "subjects"
     },
     {
-        id: 2,
+        id: 3,
         icon: "",
         label: "Contact",
         path: "contact"

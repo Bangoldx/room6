@@ -116,7 +116,7 @@ const Student = ({ user, refreshUser }) => {
     }
 
     const handleDeleteComment = async (e) => {
-        let result = confirm("Are you sure you want to remove this user?")
+        let result = confirm("Are you sure you want to remove this comment?")
         if (result) {
             try {
                 const response = await fetch(`http://localhost:8080/adminservices/user/${e}`, {

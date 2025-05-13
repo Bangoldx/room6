@@ -18,6 +18,8 @@ import Account from './components/Account'
 import Profile from './components/Profile'
 import PasswordReset from './components/Authentication/PasswordReset'
 import ForgotPassword from './components/Authentication/ForgotPassword'
+import Subjects from './components/subjects/Subjects';
+import SubjectPage from './components/subjects/SubjectPage';
 
 function App() {
 
@@ -207,7 +209,16 @@ function App() {
               element={<PasswordReset />}
             />
 
+            <Route
+              path='subjects'
+              element={<Subjects />}
+            />
+            <Route
+              path='/subjects/:subject' // I dont actually know how i am going to set this up yet.,.,.
+              element={<SubjectPage />}
+            />
           </Routes>
+
         </Router>
 
         <br />

@@ -6,7 +6,7 @@ const Signup = () => {
 
 
     const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState(""); 
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [pwHash, setPassword] = useState("");
@@ -45,7 +45,6 @@ const Signup = () => {
                 username,
                 pwHash,
                 role,
-                subjects
             }),
         });
         const result = await response.text();
