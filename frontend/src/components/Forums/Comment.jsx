@@ -102,18 +102,23 @@ const Comment = ({ post, user }) => {
                     ))}
                 </Box>
             </Card>
-            <form onSubmit={handleSubmit}>
-                <TextField
-                    aria-label="minimum height"
-                    fullWidth
-                    multiline rows={3}
-                    placeholder="Reply"
-                    value={body}
-                    style={{ background: "white", borderStyle: "solid" }}
-                    onChange={(e) => setBody(e.target.value)}>
-                </TextField>
-                <Button variant="contained" type="submit">Reply!</Button>
-            </form>
+            {user ?
+                <form onSubmit={handleSubmit}>
+                    <TextField
+                        aria-label="minimum height"
+                        fullWidth
+                        multiline rows={3}
+                        placeholder="Reply"
+                        value={body}
+                        style={{ background: "white", borderStyle: "solid" }}
+                        onChange={(e) => setBody(e.target.value)}>
+                    </TextField>
+                    <Button variant="contained" type="submit">Reply!</Button>
+                </form>
+                :
+                <h3>Sign in to comment on this post</h3>
+            }
+
         </>
     )
 }

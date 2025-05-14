@@ -4,7 +4,7 @@ import { Box, Button, TextField, Card, CardContent, Typography, Grid2, Container
 
 
 
-const Forum = () => {
+const Forum = ({ user }) => {
 
     const [post, setPost] = useState([]);
     const navigate = useNavigate();
@@ -33,10 +33,10 @@ const Forum = () => {
 
     return (
         <>
-            <Card style={{maxWidth:750, margin:"0 auto"}}>
+            <Card style={{ maxWidth: 750, margin: "0 auto" }}>
                 {post.map((item, id) => (
                     <ListItem
-                    divider
+                        divider
                     // secondaryAction={
                     //     <Tooltip title="Delete">
                     //         <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
@@ -45,6 +45,7 @@ const Forum = () => {
                     //     </Tooltip>
                     // }
                     >
+
                         <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
                             <ListItemText primary={item.title} />
                         </Link>
@@ -52,9 +53,13 @@ const Forum = () => {
                 ))}
             </Card>
             <br />
-            <Link to={"/newpost"}>
+            {user ? <Link to={"/newpost"}>
                 <Button variant="contained">New Post</Button>
             </Link>
+                :
+                <h3>Sign in to post something!</h3>}
+
+
         </>
     )
 }

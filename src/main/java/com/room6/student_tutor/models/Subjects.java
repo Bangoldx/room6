@@ -9,9 +9,9 @@ public class Subjects {
     @Id
     @GeneratedValue(strategy=GenerationType.TABLE, generator="yourTableGenerator")
     private int id;
-    @NotNull
+//    @NotNull
     private String name;
-    @NotNull
+//    @NotNull
     private String description;
 
 

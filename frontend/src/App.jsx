@@ -20,6 +20,7 @@ import PasswordReset from './components/Authentication/PasswordReset'
 import ForgotPassword from './components/Authentication/ForgotPassword'
 import Subjects from './components/subjects/Subjects';
 import SubjectPage from './components/subjects/SubjectPage';
+import NewSubject from './components/subjects/NewSubject';
 
 function App() {
 
@@ -173,7 +174,8 @@ function App() {
             </Route>
 
             <Route path='forums'
-              element={<Forum />}>
+              element={<Forum 
+              user={user}/>}>
             </Route>
 
             <Route path='newpost'
@@ -211,8 +213,13 @@ function App() {
 
             <Route
               path='subjects'
-              element={<Subjects />}
+              element={<Subjects 
+              user={user}/>}
             />
+            <Route path='/newsubject'
+              element={<NewSubject
+              />}>
+            </Route>
             <Route
               path='/subjects/:subject' // I dont actually know how i am going to set this up yet.,.,.
               element={<SubjectPage />}
