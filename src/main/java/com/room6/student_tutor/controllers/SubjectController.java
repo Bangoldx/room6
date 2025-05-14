@@ -43,8 +43,9 @@ public class SubjectController {
 
         for(Subjects subject : subjects){
             int id = subject.getId();
-            String name = subject.getName();;
-            SubjectsDTO subjectDTO = SubjectDTOMapper.toSubjectDTO(subject,id,name);
+            String name = subject.getName();
+            String description = subject.getDescription();
+            SubjectsDTO subjectDTO = SubjectDTOMapper.toSubjectDTO(subject,id,name,description);
             subjectsDTOS.add(subjectDTO);
         }
         return subjectsDTOS;

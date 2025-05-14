@@ -6,11 +6,12 @@ import com.room6.student_tutor.models.dto.CommentDTO;
 import com.room6.student_tutor.models.dto.SubjectsDTO;
 
 public class SubjectDTOMapper {
-    public static SubjectsDTO toSubjectDTO(Subjects subject, int id, String name){
+    public static SubjectsDTO toSubjectDTO(Subjects subject, int id, String name, String description){
         SubjectsDTO subjectsDTO = new SubjectsDTO();
 //        subjectsDTO.setForum(subject.getForum());
         subjectsDTO.setId(subject.getId());
         subjectsDTO.setName(subject.getName());
+        subjectsDTO.setDescription(subject.getDescription());
 
         return subjectsDTO;
 
