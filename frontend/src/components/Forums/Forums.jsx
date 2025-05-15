@@ -53,7 +53,8 @@ const Forum = ({ user }) => {
                 ))}
             </Card>
             <br />
-            {user ? <Link to={"/newpost"}>
+            {user ? 
+            <Link to={"/newpost"}>
                 <Button variant="contained">New Post</Button>
             </Link>
                 :

@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { sizing } from '@mui/system';
-import {toast, ToastContainer} from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -136,60 +136,67 @@ const Student = ({ user, refreshUser }) => {
 
     return (
         <>
-            <div id="top" class="user-container">
-                <h1>Hello student {user.firstName} {user.lastName}!</h1>
-            </div>
-        <ToastContainer position="top-right" autoClose={3000} />
-            <Container sx={{ width: 1 }}>
-                <Grid2 container spacing={2}>
-                    <Grid2>
-                        <Card
-                            sx={{ width: 322 }}>
-                            <h3>My Posts</h3>
-                            <hr />
-                            {userPosts.map((item, id) => (
-                                <ListItem
-                                    divider
-                                    secondaryAction={
-                                        <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    }
-                                >
-                                    <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
-                                        <ListItemText primary={item.title} />
-                                    </Link>
-                                </ListItem>
-                            ))}
-                        </Card>
-                    </Grid2>
-                    <Grid2>
-                        <Card
-                            sx={{ width: 322 }}>
-                            <h3>My Comments</h3>
-                            <hr />
-                            {userComments.map((item, id) => (
-                                <ListItem
-                                    divider
-                                    secondaryAction={
-                                        <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeleteComment(item.forum.id)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    }
-                                >
-                                    <Link to={`/forums/${item.forum.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
-                                        <ListItemText primary={item.body} />
-                                    </Link>
-                                </ListItem>
-                            ))}
-                        </Card>
-                    </Grid2>
-                </Grid2>
-            </Container>
+            {!user ? <h2>Hmmm... Seems like you're not logged in. Try <a href="/login">HERE</a>.</h2>
+                : user.role !== "student" ? navigate("/dashboard")
+                    :
+                    <div>
+                        <div id="top" class="user-container">
+                            <h1>Hello student {user.firstName} {user.lastName}!</h1>
+                        </div>
+                        <ToastContainer position="top-right" autoClose={3000} />
+                        <Container sx={{ width: 1 }}>
+                            <Grid2 container spacing={2}>
+                                <Grid2>
+                                    <Card
+                                        sx={{ width: 322 }}>
+                                        <h3>My Posts</h3>
+                                        <hr />
+                                        {userPosts.map((item, id) => (
+                                            <ListItem
+                                                divider
+                                                secondaryAction={
+                                                    <Tooltip title="Delete">
+                                                        <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                                    <ListItemText primary={item.title} />
+                                                </Link>
+                                            </ListItem>
+                                        ))}
+                                    </Card>
+                                </Grid2>
+                                <Grid2>
+                                    <Card
+                                        sx={{ width: 322 }}>
+                                        <h3>My Comments</h3>
+                                        <hr />
+                                        {userComments.map((item, id) => (
+                                            <ListItem
+                                                divider
+                                                secondaryAction={
+                                                    <Tooltip title="Delete">
+                                                        <IconButton edge="end" onClick={() => handleDeleteComment(item.forum.id)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                <Link to={`/forums/${item.forum.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                                    <ListItemText primary={item.body} />
+                                                </Link>
+                                            </ListItem>
+                                        ))}
+                                    </Card>
+                                </Grid2>
+                            </Grid2>
+                        </Container>
+
+                    </div>
+            }
 
         </>
     );

@@ -13,6 +13,10 @@ const Tutor = ({ user, refreshUser }) => {
 
     return (
         <>
+        {!user ? <h2>Hmmm... Seems like you're not logged in. Try <a href="/login">HERE</a>.</h2>
+                : user.role !== "tutor" ? navigate("/dashboard")
+                    :
+                    <div>
             <div id="top" class="user-container">
                 <h1>Hello tutor {user.firstName} {user.lastName}!</h1>
             </div>
@@ -39,7 +43,8 @@ const Tutor = ({ user, refreshUser }) => {
                     </Grid2>
                 </Grid2>
             </Container>
-
+            </div>
+}
         </>
     );
 }

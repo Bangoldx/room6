@@ -130,109 +130,114 @@ const Admin = ({ user }) => {
     return (
         <>
             <ToastContainer position="top-right" autoClose={3000} />
+            {!user ? <h2>Hmmm... Seems like you're not logged in. Try <a href="/login">HERE</a>.</h2>
+                : user.role !== "admin" ? navigate("/dashboard")
+                    :
+                    <div>
+                        <h1>Welcome {user.firstName}, You have all the power!</h1>
+                        <Container sx={{ width: 1 }}>
+                            <Grid2 container spacing={2}>
 
-            <h1>Welcome {user.firstName}, You have all the power!</h1>
-            <Container sx={{ width: 1 }}>
-                <Grid2 container spacing={2}>
+                                <Card
+                                    sx={{ width: 322 }}>
+                                    <h3>Users | {users.length}</h3>
+                                    <hr />
+                                    {users.map((item, id) => (
+                                        <ListItem
+                                            divider
+                                            secondaryAction={
+                                                <Tooltip title="Delete">
+                                                    <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            }
+                                        >
+                                            {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
+                                            <ListItemText primary={item.username} />
+                                            {/* </Link> */}
+                                        </ListItem>
+                                    ))}
+                                </Card>
 
-                    <Card
-                        sx={{ width: 322 }}>
-                        <h3>Users | {users.length}</h3>
-                        <hr />
-                        {users.map((item, id) => (
-                            <ListItem
-                                divider
-                                secondaryAction={
-                                    <Tooltip title="Delete">
-                                        <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </Tooltip>
-                                }
-                            >
-                                {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
-                                <ListItemText primary={item.username} />
-                                {/* </Link> */}
-                            </ListItem>
-                        ))}
-                    </Card>
+                                <Grid2>
+                                    <Card
+                                        sx={{ width: 322 }}>
+                                        <h3>Students | {students.length}</h3>
+                                        <hr />
 
-                    <Grid2>
-                        <Card
-                            sx={{ width: 322 }}>
-                            <h3>Students | {students.length}</h3>
-                            <hr />
+                                        {students.map((item, index) => (
+                                            <ListItem
+                                                divider
+                                                secondaryAction={
+                                                    <Tooltip title="Delete">
+                                                        <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
+                                                <ListItemText primary={item.username} />
+                                                {/* </Link> */}
+                                            </ListItem>
+                                        ))}
+                                    </Card>
+                                </Grid2>
+                                <Grid2>
+                                    <Card
+                                        sx={{ width: 322 }}>
+                                        <h3>Tutors | {tutors.length}</h3>
+                                        <hr />
+                                        {tutors.map((item, index) => (
+                                            <ListItem
+                                                divider
+                                                secondaryAction={
+                                                    <Tooltip title="Delete">
+                                                        <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
+                                                <ListItemText primary={item.username} />
+                                                {/* </Link> */}
+                                            </ListItem>
+                                        ))}
+                                    </Card>
+                                </Grid2>
+                            </Grid2>
+                            <br />
+                            <Grid2 container spacing={2}>
 
-                            {students.map((item, index) => (
-                                <ListItem
-                                    divider
-                                    secondaryAction={
-                                        <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    }
-                                >
-                                    {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
-                                    <ListItemText primary={item.username} />
-                                    {/* </Link> */}
-                                </ListItem>
-                            ))}
-                        </Card>
-                    </Grid2>
-                    <Grid2>
-                        <Card
-                            sx={{ width: 322 }}>
-                            <h3>Tutors | {tutors.length}</h3>
-                            <hr />
-                            {tutors.map((item, index) => (
-                                <ListItem
-                                    divider
-                                    secondaryAction={
-                                        <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeleteUser(item.id)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    }
-                                >
-                                    {/* <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}> */}
-                                    <ListItemText primary={item.username} />
-                                    {/* </Link> */}
-                                </ListItem>
-                            ))}
-                        </Card>
-                    </Grid2>
-                </Grid2>
-                <br />
-                <Grid2 container spacing={2}>
-
-                    <Grid2>
-                        <Card
-                            sx={{ width: 322 }}>
-                            <h3>Posts | {post.length}</h3>
-                            <hr />
-                            {post.map((item, id) => (
-                                <ListItem
-                                    divider
-                                    secondaryAction={
-                                        <Tooltip title="Delete">
-                                            <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    }
-                                >
-                                    <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
-                                        <ListItemText primary={item.title} />
-                                    </Link>
-                                </ListItem>
-                            ))}
-                        </Card>
-                    </Grid2>
-                </Grid2>
-            </Container>
+                                <Grid2>
+                                    <Card
+                                        sx={{ width: 322 }}>
+                                        <h3>Posts | {post.length}</h3>
+                                        <hr />
+                                        {post.map((item, id) => (
+                                            <ListItem
+                                                divider
+                                                secondaryAction={
+                                                    <Tooltip title="Delete">
+                                                        <IconButton edge="end" onClick={() => handleDeletePost(item.forumId)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                <Link to={`/forums/${item.forumId}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                                    <ListItemText primary={item.title} />
+                                                </Link>
+                                            </ListItem>
+                                        ))}
+                                    </Card>
+                                </Grid2>
+                            </Grid2>
+                        </Container>
+                    </div>
+            }
         </>
     )
 
