@@ -58,8 +58,10 @@ const Subjects = ({ user }) => {
                 {subject.map((item, id) => (
                     <ListItem
                         divider
-                    >
-                        <ListItemText primary={item.name} />
+                    ><Link to={`/subjects/${item.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                                <ListItemText primary={item.name} />
+                                            </Link>
+                        {/* <ListItemText primary={item.name} /> */}
                     </ListItem>
                 ))}
             </Card>

@@ -21,6 +21,7 @@ import ForgotPassword from './components/Authentication/ForgotPassword'
 import Subjects from './components/subjects/Subjects';
 import SubjectPage from './components/subjects/SubjectPage';
 import NewSubject from './components/subjects/NewSubject';
+import MySubjects from './components/subjects/MySubjects';
 
 function App() {
 
@@ -143,87 +144,117 @@ function App() {
           <Routes>
 
             <Route path='/'
-              element={<Landing />}>
+              element={<Landing
+              />}>
             </Route>
 
             <Route path='signup'
-              element={<Signup />}>
+              element={<Signup
+              />}>
             </Route>
 
             <Route path='login'
               element={<Login
                 refreshUser={refreshUser}
-                user={user} />}>
+                user={user}
+              />}>
             </Route>
 
             <Route path='admin'
               element={<Admin
-                user={user} />}>
+                user={user}
+              />}>
             </Route>
 
             <Route path='student'
               element={<Student
                 user={user}
-                refreshUser={refreshUser} />}>
+                refreshUser={refreshUser}
+              />}>
             </Route>
 
             <Route path='tutor'
               element={<Tutor
                 user={user}
-                refreshUser={refreshUser} />}>
+                refreshUser={refreshUser}
+              />}>
             </Route>
 
             <Route path='forums'
-              element={<Forum 
-              user={user}/>}>
+              element={<Forum
+                user={user}
+              />}>
             </Route>
 
             <Route path='newpost'
               element={<NewPost
-                user={user} />}>
+                user={user}
+              />}>
             </Route>
 
             <Route
               path='/forums/:postId'
               element={<PostPage
                 user={user}
-              />}
-            />
+              />}>
+            </Route>
 
             <Route path='dashboard'
               element={<Dashboard
-                user={user} />}>
+                user={user}
+              />}>
             </Route>
+
             <Route path='account'
               element={<Account
-                user={user} />}>
+                user={user}
+              />}>
             </Route>
+
             <Route path='profile'
               element={<Profile
-                user={user} />}>
+                user={user}
+              />}>
             </Route>
+
             <Route
               path='forgotpassword'
-              element={<ForgotPassword />}
-            />
+              element={<ForgotPassword
+              />}>
+            </Route>
+
             <Route
               path='resetpassword'
-              element={<PasswordReset />}
-            />
+              element={<PasswordReset
+              />}>
+            </Route>
 
             <Route
               path='subjects'
-              element={<Subjects 
-              user={user}/>}
-            />
+              element={<Subjects
+                user={user}
+              />}>
+            </Route>
+
             <Route path='/newsubject'
               element={<NewSubject
               />}>
             </Route>
+
             <Route
-              path='/subjects/:subject' // I dont actually know how i am going to set this up yet.,.,.
-              element={<SubjectPage />}
-            />
+              path='/subjects/:subjectId'
+              element={<SubjectPage
+                user={user}
+              />}>
+            </Route>
+
+            <Route
+              path='/user/subjects'
+              element={<MySubjects
+                user={user}
+              />}>
+            </Route>
+
           </Routes>
 
         </Router>

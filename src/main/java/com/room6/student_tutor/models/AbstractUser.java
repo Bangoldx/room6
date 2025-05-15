@@ -3,9 +3,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.security.auth.Subject;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @MappedSuperclass
 public abstract class AbstractUser {
@@ -20,19 +23,18 @@ public abstract class AbstractUser {
     private String username;
     @NotNull
     private String pwHash;
-    private List<String> subjects;
     private String resetToken;
     private LocalDateTime tokenExpirationDate;
 
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role, List<String> subjects) {
+    public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.pwHash = encoder.encode(pwHash);
         this.role = role;
-        this.subjects = subjects;
     }
 
     public AbstractUser(String username, String password){
@@ -78,14 +80,6 @@ public abstract class AbstractUser {
         this.role = role;
     }
 
-    public List<String> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
-    }
-
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }
@@ -113,4 +107,7 @@ public abstract class AbstractUser {
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
     }
+
+
+
 }
