@@ -4,6 +4,7 @@ import com.room6.student_tutor.data.*;
 import com.room6.student_tutor.mappers.ForumsDTOMapper;
 import com.room6.student_tutor.mappers.UserDTOMapper;
 import com.room6.student_tutor.models.Forum;
+import com.room6.student_tutor.models.Subjects;
 import com.room6.student_tutor.models.User;
 import com.room6.student_tutor.models.dto.ForumDTO;
 import com.room6.student_tutor.models.dto.UserDTO;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/adminservices")
@@ -47,7 +49,8 @@ public class AdminController {
             int id = user.getId();
             String username = user.getUsername();
             String role = user.getRole();
-            UserDTO userDTO = UserDTOMapper.toUserDTO(user, username, role, id);
+            Set<Subjects> subjects = user.getSubjects();
+            UserDTO userDTO = UserDTOMapper.toUserDTO(user, username, role, id, subjects);
             userDTOS.add(userDTO);
         }
         return userDTOS;

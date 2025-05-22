@@ -32,16 +32,6 @@ const Subjects = ({ user }) => {
         getSubjects();
     }, [])
 
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         getSubjects();
-    //     }, 10);
-
-    //     return () => clearTimeout(timeout);
-    // },);
-
-
-
     return (
         <>
             <h1>Hello from the subjects page</h1>
@@ -59,7 +49,9 @@ const Subjects = ({ user }) => {
                     <ListItem
                         divider
                     >
+                        <Link to={`/subjects/${item.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
                         <ListItemText primary={item.name} />
+                        </Link>
                     </ListItem>
                 ))}
             </Card>

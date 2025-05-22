@@ -221,8 +221,9 @@ function App() {
               />}>
             </Route>
             <Route
-              path='/subjects/:subject' // I dont actually know how i am going to set this up yet.,.,.
-              element={<SubjectPage />}
+              path='/subjects/:subjectId' // I dont actually know how i am going to set this up yet.,.,.
+              element={<SubjectPage 
+              user={user}/>}
             />
           </Routes>
 

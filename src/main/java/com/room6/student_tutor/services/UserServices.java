@@ -1,11 +1,14 @@
 package com.room6.student_tutor.services;
 
 import com.room6.student_tutor.data.StudentRepository;
+import com.room6.student_tutor.data.SubjectRepository;
 import com.room6.student_tutor.data.TutorRepository;
 import com.room6.student_tutor.data.UserRepository;
 import com.room6.student_tutor.models.Student;
+import com.room6.student_tutor.models.Subjects;
 import com.room6.student_tutor.models.Tutor;
 import com.room6.student_tutor.models.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,7 +25,10 @@ public class UserServices {
     private TutorRepository tutorRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -53,4 +59,22 @@ public class UserServices {
     }
     public boolean userExistsByUsername(String username) {
         return userRepository.findByUsername(username).isPresent();
-    }}
+    }
+
+    @Transactional
+    public void joinSubject(int userId, int subjectId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Subjects subject = subjectRepository.findById(subjectId).orElseThrow();
+        user.joinSubject(subject);
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void leaveSubject(int userId, int subjectId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Subjects subject = subjectRepository.findById(subjectId).orElseThrow();
+        user.joinSubject(subject);
+        userRepository.save(user);
+    }
+
+}

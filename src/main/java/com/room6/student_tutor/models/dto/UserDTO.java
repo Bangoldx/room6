@@ -1,10 +1,12 @@
 package com.room6.student_tutor.models.dto;
 
+import com.room6.student_tutor.models.Subjects;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.List;
+import java.util.Set;
 
 public class UserDTO {
 
@@ -14,10 +16,10 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String role;
-    private List<String> subjects;
+    private Set<Subjects> subjects;
     private int id;
 
-    public UserDTO(String username, String firstName, String lastName, String email, String role, List<String> subjects, int id) {
+    public UserDTO(String username, String firstName, String lastName, String email, String role, Set<Subjects> subjects, int id) {
         this.username = username;
 //        this.password = password;
         this.firstName = firstName;
@@ -79,11 +81,11 @@ public class UserDTO {
         this.role = role;
     }
 
-    public List<String> getSubjects() {
+    public Set<Subjects> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<String> subjects) {
+    public void setSubjects(Set<Subjects> subjects) {
         this.subjects = subjects;
     }
 

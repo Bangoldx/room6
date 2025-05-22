@@ -3,6 +3,9 @@ package com.room6.student_tutor.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Subjects {
     @TableGenerator(name = "yourTableGenerator", allocationSize = 1, initialValue = 1)
@@ -14,6 +17,8 @@ public class Subjects {
 //    @NotNull
     private String description;
 
+    @ManyToMany(mappedBy = "subjects")
+    private Set<User> users = new HashSet<>();
 
 //    @ManyToOne
 //    private Forum forum;
@@ -50,7 +55,16 @@ public class Subjects {
     public void setDescription(@NotNull String description) {
         this.description = description;
     }
-//    public Forum getForum() {
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    //    public Forum getForum() {
 //        return forum;
 //    }
 //

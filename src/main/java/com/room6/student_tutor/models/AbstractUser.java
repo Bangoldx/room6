@@ -20,19 +20,18 @@ public abstract class AbstractUser {
     private String username;
     @NotNull
     private String pwHash;
-    private List<String> subjects;
+//    private List<String> subjects;
     private String resetToken;
     private LocalDateTime tokenExpirationDate;
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role, List<String> subjects) {
+    public AbstractUser(String firstName, String lastName, String email, String username, String pwHash, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.username = username;
         this.pwHash = encoder.encode(pwHash);
         this.role = role;
-        this.subjects = subjects;
     }
 
     public AbstractUser(String username, String password){
@@ -76,14 +75,6 @@ public abstract class AbstractUser {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public List<String> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
     }
 
     public boolean isMatchingPassword(String password) {

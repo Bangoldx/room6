@@ -15,8 +15,10 @@ const Student = ({ user, refreshUser }) => {
     const navigate = useNavigate();
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
+    const [subjects, setSubjects] = useState([]);
     let userComments = [];
     let userPosts = [];
+    let userSubjects = [];
 
 
     const getPosts = async () => {
@@ -83,6 +85,39 @@ const Student = ({ user, refreshUser }) => {
             userComments.push(comment)
         }
     })
+    
+            const fetchSubjects = async () => {
+                try {
+                    const response = await fetch("http://localhost:8080/subjectservices/subjects", {
+                        method: "GET"
+                    }
+                    );
+                    if (response.ok) {
+                        const subjectData = await response.json();
+                        setSubjects(subjectData);
+                        console.log(subjects);
+                    } else {
+                        console.error("Failed to retrieve subjects");
+                        setSubjects("");
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+    
+            }
+            useEffect(() => {
+                const timeout = setTimeout(() => {
+                    fetchSubjects();
+                }, 10);
+        
+                return () => clearTimeout(timeout);
+            }, []);
+        
+            subjects.forEach(subject => {
+                if (subject.userid === user.id) {
+                    userComments.push(subject)
+                }
+            })
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: '#fff',
@@ -173,6 +208,29 @@ const Student = ({ user, refreshUser }) => {
                                     <Card
                                         sx={{ width: 322 }}>
                                         <h3>My Comments</h3>
+                                        <hr />
+                                        {userComments.map((item, id) => (
+                                            <ListItem
+                                                divider
+                                                secondaryAction={
+                                                    <Tooltip title="Delete">
+                                                        <IconButton edge="end" onClick={() => handleDeleteComment(item.forum.id)}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                }
+                                            >
+                                                <Link to={`/forums/${item.forum.id}`} style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                                                    <ListItemText primary={item.body} />
+                                                </Link>
+                                            </ListItem>
+                                        ))}
+                                    </Card>
+                                </Grid2>
+                                <Grid2>
+                                    <Card
+                                        sx={{ width: 322 }}>
+                                        <h3>My Subjects</h3>
                                         <hr />
                                         {userComments.map((item, id) => (
                                             <ListItem
